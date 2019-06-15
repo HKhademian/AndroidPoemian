@@ -1,0 +1,28 @@
+private def extract(group, single = null) {
+	if(group instanceof String) {
+		single = single ?: group[0..-2]
+		group = new File(rootProject.projectDir, group)
+	}
+	if(group == null || !group.exists()) {
+		return
+	}
+
+	group.eachDir() { dir ->
+		def name = dir.name
+
+		if (name == null || name == '_' || name.startsWith('__')) {
+			return
+		}
+
+		if (name.startsWith('_')) {
+			return extract(dir, "$single-${name[1..-2]}")
+		}
+
+		def prj = ":$single-${name}"
+		include prj
+		project(prj).projectDir = dir
+	}
+}
+
+extract 'libs'
+extract 'services'

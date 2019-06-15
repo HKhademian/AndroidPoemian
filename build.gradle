@@ -1,0 +1,135 @@
+buildscript {
+	apply from: './deps.gradle'
+
+	repositories {
+		google()
+		jcenter()
+		// maven { url 'https://maven.fabric.io/public' }
+	}
+
+	dependencies {
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+		classpath 'com.android.tools.build:gradle:3.4.1'
+		// classpath 'com.google.gms:google-services:4.2.0'
+		// classpath 'io.fabric.tools:gradle:1.26.1'
+	}
+}
+
+allprojects {
+	repositories {
+		google()
+		jcenter()
+		// mavenCentral()
+
+		// flatDir { dirs 'libs' }
+		flatDir { dirs new File(rootProject.projectDir, 'libs') }
+
+		// maven { url 'https://jitpack.io' }
+		// maven { url 'https://repository.cheshmak.me' } // Cheshmak
+		maven { url 'http://swisscodemonkeys.github.io/appbrain-sdk/maven' } // AppBrain
+	}
+}
+
+//task clean(type: Delete) {
+//	delete rootProject.buildDir
+//}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+//apply plugin: 'io.fabric'
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+	kotlinOptions {
+		freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+	}
+}
+
+android {
+	compileSdkVersion Versions.App.compileSdk
+	defaultConfig {
+		minSdkVersion Versions.App.minSdk
+		targetSdkVersion Versions.App.targetSdk
+
+		applicationId 'ir.hco.appian.app'
+		versionCode 101
+		versionName '01.01'
+
+		resConfigs 'en'
+		vectorDrawables.useSupportLibrary true
+
+		buildConfigField 'String', 'APP_LINK', '"bit.ly/*"'
+
+		//buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
+		//buildConfigField 'String', 'DEVELOPER_TITLE', '"HossainCo"'
+		//buildConfigField 'String', 'DEVELOPER_EMAIL', '"hco@post.com"'
+		//buildConfigField 'String', 'DEVELOPER_PHONE', '"+98 933 481 5552"'
+		//buildConfigField 'String', 'DEVELOPER_LI', '"https://www.linkedin.com/in/hossain-khademian-45692166"'
+		//buildConfigField 'String', 'DEVELOPER_TW', '"https://twitter.com/HKhademian"'
+	}
+	buildTypes {
+		debug {
+			versionNameSuffix '-debug'
+		}
+		release {
+			minifyEnabled true
+			shrinkResources true
+			// useProguard false
+			signingConfig signingConfigs.debug
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+				'proguard-rules.pro',
+				'../../proguard-flatten.pro',
+				'../../proguard-dictionary.pro'
+		}
+	}
+
+	flavorDimensions 'market'
+	productFlavors {
+		googlePlay {
+			dimension 'market'
+			versionNameSuffix '-play'
+			//buildConfigField 'String', 'START_APP_AD_ID', '"204084927"'
+
+			//buildConfigField 'String', 'START_APP_AD_ID', '"203420214"'
+			//applicationId 'ir.hossainco.fal.hafiz'
+		}
+		bazaar {
+			dimension 'market'
+			versionNameSuffix '-bazaar'
+		}
+	}
+
+//	compileOptions {
+//		sourceCompatibility 'JavaVersion.VERSION_1_8'
+//		targetCompatibility 'JavaVersion.VERSION_1_8'
+//	}
+
+	packagingOptions {
+		exclude '/kotlin_metadata/**'
+		exclude '/kotlin/**'
+		exclude '/fabric/**'
+		exclude '/*.properties'
+	}
+}
+
+dependencies {
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+	// implementation Deps.coroutines
+	implementation Deps.anko_sdk27
+
+	implementation Deps.core_ktx
+	implementation Deps.fragment
+	implementation Deps.fragment_ktx
+	implementation Deps.recyclerview
+	implementation Deps.appcompat
+	implementation Deps.cardview
+
+	implementation Deps.lifecycle_extensions
+	implementation Deps.lifecycle_viewmodel_ktx
+	kapt Deps.lifecycle_compiler
+
+	implementation project(':lib-util')
+}

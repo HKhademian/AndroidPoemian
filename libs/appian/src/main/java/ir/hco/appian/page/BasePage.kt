@@ -1,9 +1,7 @@
 package ir.hco.appian.page
 
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 
 abstract class BasePage : Fragment() {
 	open val title: String? = null

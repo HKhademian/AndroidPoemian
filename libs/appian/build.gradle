@@ -29,6 +29,8 @@ dependencies {
 	implementation Deps.fragment
 	implementation Deps.fragment_ktx
 	implementation Deps.recyclerview
+	implementation Deps.appcompat
+	implementation Deps.cardview
 
 	implementation Deps.lifecycle_extensions
 	implementation Deps.lifecycle_viewmodel_ktx

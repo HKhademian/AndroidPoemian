@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Query
-import ir.hco.appian.app.page.BasePage
+import ir.hco.appian.page.BasePage
 import ir.hco.appian.app.page.articleDetail.ArticleDetailPage
 import org.jetbrains.anko.AnkoContext
 import java.io.Serializable

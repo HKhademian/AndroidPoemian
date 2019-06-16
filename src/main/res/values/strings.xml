@@ -7,6 +7,9 @@
 	<string name="item_share">اشتراک گذاری</string>
 	<string name="item_copy">کپی</string>
 	<string name="item_bookmark">علامتگذاری</string>
+	<string name="item_bookmarks">علامت گذاری ها</string>
+	<string name="item_settings">تنظیمات</string>
+	<string name="item_about_us">درباره ما</string>
 
 	<string name="action_copy_done">متن پیام کپی شد</string>
 	<string name="title_share_chooser">اشتراک گذاری در …</string>

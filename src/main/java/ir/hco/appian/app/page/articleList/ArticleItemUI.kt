@@ -19,10 +19,7 @@ internal class ArticleItemUI : AnkoComponent<ArticleAdapter> {
 			appTextView(id = R.id.index) {
 				gravity = CENTER
 				padding = dip(16)
-				owner.page.observeFontSizeMultiplier {
-					textSize = TextSize.ExtraLargeTextSize.value * it
-				}
-			}
+			}.lparams(width = WRAP_CONTENT, height = MATCH_PARENT)
 
 			view {
 				backgroundColor = Color.parseColor("#33111111")
@@ -31,10 +28,7 @@ internal class ArticleItemUI : AnkoComponent<ArticleAdapter> {
 			appTextView(id = R.id.title, textSize = TextSize.LargeTextSize) {
 				padding = dip(16)
 				gravity = START or CENTER_VERTICAL
-				owner.page.observeFontSizeMultiplier {
-					textSize = TextSize.LargeTextSize.value * it
-				}
-			}.lparams(width = 0, height = MATCH_PARENT, weight = 1f)
+			}.lparams(width = 0, height = WRAP_CONTENT, weight = 1f)
 
 			view {
 				backgroundColor = Color.parseColor("#33111111")
@@ -44,8 +38,6 @@ internal class ArticleItemUI : AnkoComponent<ArticleAdapter> {
 				id = R.id.bookmark
 				padding = dip(12)
 			}.lparams(width = dip(48), height = dip(48))
-
-
 		}
 	}
 }

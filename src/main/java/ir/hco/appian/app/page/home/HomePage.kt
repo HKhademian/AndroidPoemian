@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Query
-import ir.hco.appian.app.page.BasePage
+import ir.hco.appian.page.BasePage
 import ir.hco.appian.app.page.articleDetail.ArticleDetailPage
 import ir.hco.appian.app.page.articleList.ArticleListPage
 import org.jetbrains.anko.AnkoContext

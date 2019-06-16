@@ -131,10 +131,10 @@ dependencies {
 	implementation Deps.lifecycle_viewmodel_ktx
 	kapt Deps.lifecycle_compiler
 
-	implementation Deps.pushe
+	// implementation Deps.pushe
 
-	googlePlayImplementation 'com.startapp:inapp-sdk:3.12.3'
-	bazaarImplementation 'com.appbrain:appbrain-sdk:+@aar'
+	// googlePlayImplementation 'com.startapp:inapp-sdk:3.12.3'
+	// bazaarImplementation 'com.appbrain:appbrain-sdk:+@aar'
 
 	implementation project(':lib-util')
 	implementation project(':lib-appian')

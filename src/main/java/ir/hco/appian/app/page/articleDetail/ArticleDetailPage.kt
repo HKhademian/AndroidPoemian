@@ -9,7 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProviders
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Repository
-import ir.hco.appian.app.page.BasePage
+import ir.hco.appian.page.BasePage
 import org.jetbrains.anko.AnkoContext
 
 class ArticleDetailPage() : BasePage() {

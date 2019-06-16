@@ -6,8 +6,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.transaction
 import ir.hco.appian.app.page.home.HomePage
 import ir.hossainco.utils.packages.forceLayoutDir
@@ -23,24 +21,7 @@ class MainActivity : AppCompatActivity() {
 
 		MainUI().createView(AnkoContext.create(this, this, true))
 
-		val drawer = findViewById<DrawerLayout>(R.id.drawer)
-		val toolbar = findViewById<Toolbar>(R.id.toolbar)
-		setSupportActionBar(toolbar)
-		supportActionBar?.let { actionbar ->
-			// val toggle = ActionBarDrawerToggle(
-			// 	this, drawer, toolbar,
-			// 	R.string.drawer_open,
-			// 	R.string.drawer_close
-			// )
-			// toggle.isDrawerIndicatorEnabled = true
-			// toggle.toolbarNavigationClickListener = View.OnClickListener { drawer.openDrawer(GravityCompat.START) }
-
-			//actionbar.setHomeAsUpIndicator(R.drawable.ic_menu)
-			//actionbar.setDisplayHomeAsUpEnabled(true)
-
-			actionbar.setDisplayShowHomeEnabled(true)
-			actionbar.setIcon(R.mipmap.ic_launcher)
-		}
+		setSupportActionBar(findViewById(R.id.toolbar))
 
 		if (savedInstanceState == null) {
 			supportFragmentManager.transaction {
@@ -55,45 +36,13 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private fun handleIntent(intent: Intent?): Boolean {
-		if (intent == null)
-			return false
-
-		val extras = intent.extras
-		val appLinkAction = intent.action
-		val appLinkData = intent.data
-
-		val storyId = when {
-			Intent.ACTION_VIEW == appLinkAction && appLinkData != null ->
-				appLinkData.lastPathSegment?.toIntOrNull() ?: -1
-
-			extras?.containsKey("story_id") == true ->
-				extras.getInt("story_id", -1)
-
-			extras?.containsKey("storyId") == true ->
-				extras.getInt("storyId", -1)
-
-			else -> -1
-		}
-
-		//if (!checkStoryId(storyId))
+		//if (intent == null)
 		//	return false
 
-		//supportFragmentManager.transaction {
-		//replace(R.id.fragment, StoryDetailPage(storyId))
-		//addToBackStack("storyDetail")
-		//}
-		//return true
+		//val extras = intent.extras
+		//val appLinkAction = intent.action
+		//val appLinkData = intent.data
 
 		return false
 	}
-
-//	override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-//		if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-//			return Repository.fontSizeMultiplierUp()
-//		} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-//			return Repository.fontSizeMultiplierDown()
-//		}
-//
-//		return super.onKeyDown(keyCode, event)
-//	}
 }

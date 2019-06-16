@@ -10,10 +10,10 @@ import androidx.cardview.widget.CardView
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Repository
-import ir.hco.appian.app.utils.linearLParams
-import ir.hco.appian.app.utils.views.item
-import ir.hco.appian.app.utils.views.myCardView
-import ir.hco.appian.app.utils.views.myTextView
+import ir.hco.appian.utils.linearLParams
+import ir.hco.appian.utils.views.item
+import ir.hco.appian.utils.views.myCardView
+import ir.hco.appian.utils.views.myTextView
 import ir.hossainco.utils.App.context
 import ir.hossainco.utils.ui.TextSize
 import ir.hossainco.utils.view.spliter
@@ -59,17 +59,17 @@ internal class HomeUI : AnkoComponent<HomePage> {
 			spliter ()
 			spliter ()
 
-			item(ui.owner, titleRes = R.string.item_bookmarks, icon = R.mipmap.ic_launcher_round)
+			item(ui.owner, titleRes = R.string.item_bookmarks, iconRes = R.mipmap.ic_launcher_round)
 				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 					margin = context.dip(4)
 				}
 
-			item(ui.owner, titleRes = R.string.item_settings, icon = R.mipmap.ic_launcher_round)
+			item(ui.owner, titleRes = R.string.item_settings, iconRes = R.mipmap.ic_launcher_round)
 				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 					margin = context.dip(4)
 				}
 
-			item(ui.owner, titleRes = R.string.item_about_us, icon = R.mipmap.ic_launcher_round)
+			item(ui.owner, titleRes = R.string.item_about_us, iconRes = R.mipmap.ic_launcher_round)
 				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 					margin = context.dip(4)
 				}
@@ -80,7 +80,7 @@ internal class HomeUI : AnkoComponent<HomePage> {
 		val context = context
 		val subCategories = Repository.cats.filter { it.parentId == category.id }
 
-		val view = item(ui.owner, title = category.title, icon = R.mipmap.ic_launcher_round)
+		val view = item(ui.owner, title = category.title, iconRes = R.mipmap.ic_launcher_round)
 			.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 				margin = context.dip(4)
 			}

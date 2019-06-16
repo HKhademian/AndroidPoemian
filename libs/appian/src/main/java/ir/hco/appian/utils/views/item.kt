@@ -4,9 +4,9 @@ import android.view.Gravity.CENTER_VERTICAL
 import android.view.Gravity.START
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewManager
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.cardview.widget.CardView
-import ir.hco.appian.R
 import ir.hco.appian.page.BasePage
 import ir.hossainco.utils.ui.TextSize
 import org.jetbrains.anko.dip
@@ -20,14 +20,16 @@ fun ViewManager.item(
 	title: String? = null,
 	@StringRes titleRes: Int? = null,
 
-	icon: Int = R.mipmap.ic_launcher,
+	@DrawableRes iconRes: Int? = null,
+
 	init: (CardView.() -> Unit) = {}
 ) = myCardView(owner) {
 	linearLayout {
 		padding = dip(8)
 
-		imageView(icon)
-			.lparams(width = dip(64), height = dip(64))
+		if (iconRes != null)
+			imageView(iconRes)
+				.lparams(width = dip(64), height = dip(64))
 
 		myTextView(owner, text = title, textRes = titleRes, textSize = TextSize.LargeTextSize) {
 			gravity = START or CENTER_VERTICAL

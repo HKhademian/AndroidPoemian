@@ -1,4 +1,4 @@
-package ir.hco.appian.app.utils
+package ir.hco.appian.utils
 
 import android.view.View
 import android.view.ViewGroup

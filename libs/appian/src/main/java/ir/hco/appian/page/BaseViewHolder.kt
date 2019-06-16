@@ -1,4 +1,4 @@
-package ir.hco.appian.app.page
+package ir.hco.appian.page
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

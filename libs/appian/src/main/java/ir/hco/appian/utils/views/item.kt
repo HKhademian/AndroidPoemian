@@ -1,4 +1,4 @@
-package ir.hco.appian.app.utils.views
+package ir.hco.appian.utils.views
 
 import android.view.Gravity.CENTER_VERTICAL
 import android.view.Gravity.START
@@ -6,8 +6,8 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewManager
 import androidx.annotation.StringRes
 import androidx.cardview.widget.CardView
-import ir.hco.appian.app.R
-import ir.hco.appian.app.page.BasePage
+import ir.hco.appian.R
+import ir.hco.appian.page.BasePage
 import ir.hossainco.utils.ui.TextSize
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.imageView

@@ -1,4 +1,4 @@
-package ir.hco.appian.app.utils.views
+package ir.hco.appian.utils.views
 
 import android.graphics.Color
 import android.view.ViewManager
@@ -8,8 +8,8 @@ import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.cardview.widget.CardView
-import ir.hco.appian.app.data.Repository
-import ir.hco.appian.app.page.BasePage
+import ir.hco.appian.data.Repository
+import ir.hco.appian.page.BasePage
 import ir.hossainco.utils.ui.TextSize
 import ir.hossainco.utils.view.appTextView
 import ir.hossainco.utils.view.factory

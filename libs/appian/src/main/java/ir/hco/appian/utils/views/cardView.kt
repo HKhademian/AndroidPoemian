@@ -1,6 +1,6 @@
 @file:Suppress("PackageDirectoryMismatch")
 
-package ir.hco.appian.app.utils.views
+package ir.hco.appian.utils.views
 
 import android.view.ViewManager
 import androidx.cardview.widget.CardView

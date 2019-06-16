@@ -1,4 +1,4 @@
-package ir.hco.appian.app.utils.views
+package ir.hco.appian.utils.views
 
 import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT

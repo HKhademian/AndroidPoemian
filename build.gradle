@@ -137,4 +137,5 @@ dependencies {
 	bazaarImplementation 'com.appbrain:appbrain-sdk:+@aar'
 
 	implementation project(':lib-util')
+	implementation project(':lib-appian')
 }

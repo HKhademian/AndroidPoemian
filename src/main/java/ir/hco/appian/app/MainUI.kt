@@ -2,6 +2,7 @@ package ir.hco.appian.app
 
 import android.graphics.Color
 import android.view.Gravity.CENTER
+import android.view.Gravity.START
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.appcompat.widget.Toolbar
@@ -21,6 +22,14 @@ internal class MainUI : AnkoComponent<MainActivity> {
 
 			fitsSystemWindows = true
 
+			backgroundResource = R.color.background
+			Repository.settingsLiveData.observe(ui.owner, Observer { settings ->
+				backgroundColorResource = if (settings?.darkMode == true)
+					R.color.backgroundDark
+				else
+					R.color.background
+			})
+
 			setupDrawerContent(ui)
 //			setupDrawerSide(ui)
 //			openDrawer(GravityCompat.START)
@@ -31,25 +40,53 @@ internal class MainUI : AnkoComponent<MainActivity> {
 		verticalLayout {
 			factory(::Toolbar, theme = R.style.ThemeOverlay_AppCompat_ActionBar) {
 				id = R.id.toolbar
-
 				backgroundColorResource = R.color.primaryColor
-				setTitleTextColor(Color.WHITE)
-				setSubtitleTextColor(Color.WHITE)
+				setTitleTextColor(context.resources.getColor(R.color.primaryTextColor))
+				setSubtitleTextColor(context.resources.getColor(R.color.primaryTextColor))
+				setTitle(R.string.app_title)
+				setSubtitle(R.string.app_subtitle)
+
+//				linearLayout {
+//					layoutParams = Toolbar.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+//
+//					imageView(R.drawable.foroog) {
+//						adjustViewBounds = true
+//						padding = dip(4)
+//					}.lparams(height = dip(64)) {
+//						gravity = START
+//					}
+//
+//				}
+
+//				verticalLayout {
+//					layoutParams = Toolbar.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+//
+//					textView {
+//						id = R.id.title
+//						textColorResource = R.color.primaryTextColor
+//						gravity = CENTER
+//						textSize = 22f
+//						typeface = Typeface.SANS_SERIF
+//						setText(R.string.app_title)
+//					}.lparams(width = MATCH_PARENT, height = WRAP_CONTENT)
+//					textView {
+//						id = R.id.subtitle
+//						textColorResource = R.color.primaryTextColor
+//						gravity = CENTER
+//						textSize = 14f
+//						typeface = Typeface.SANS_SERIF
+//						setText(R.string.app_subtitle)
+//					}.lparams(width = MATCH_PARENT, height = WRAP_CONTENT)
+//				}
+
 			}
 
 			frameLayout {
 				id = R.id.fragment
-
-				Repository.settingsLiveData.observe(ui.owner, Observer { settings ->
-					backgroundColor = if (settings?.darkMode == true)
-						Color.parseColor("#FFeecc66")
-					else
-						Color.parseColor("#FFeeeeee")
-				})
 			}.lparams(width = MATCH_PARENT, height = 0, weight = 1f)
 
 			frameLayout {
-				backgroundColorResource = R.color.primaryDarkColor
+				backgroundColorResource = R.color.secondaryLightColor
 
 				appTextView(textRes = R.string.ads, dark = false)
 					.lparams(gravity = CENTER)

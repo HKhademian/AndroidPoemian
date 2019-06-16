@@ -1,33 +1,54 @@
 package ir.hco.appian.app.data
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import ir.hossainco.utils.App
-import ir.hossainco.utils.texts.toPersianLetter
-import ir.hossainco.utils.tryMap
-import org.jetbrains.anko.defaultSharedPreferences
+import org.json.JSONArray
+import org.json.JSONObject
 import kotlin.math.max
 import kotlin.math.min
 
 object Repository {
-	private const val PREF_BOOKMARKS = "bookmarks"
-
 	private const val FONT_SIZE_MUL_MAX = 2f
 	private const val FONT_SIZE_MUL_MIN = 0.5f
 
 	private val DEFAULT_SETTINGS = Settings()
-	private val DEFAULT_BOOKMARKS = emptySet<Int>()
 
 	val settingsLiveData = MutableLiveData<Settings>().apply { value = DEFAULT_SETTINGS }
 	val settings get() = settingsLiveData.value ?: DEFAULT_SETTINGS
 
-	val bookmarksLiveData = MutableLiveData<Set<Int>>().apply { value = DEFAULT_BOOKMARKS }
-	val bookmarks get() = bookmarksLiveData.value ?: DEFAULT_BOOKMARKS
+	val cats = mutableListOf<Category>()
+	val articles = mutableListOf<Article>()
+	// val paths = mutableListOf<String>()
 
 	fun init() {
-		readBookmarks()
-//		readSettings()
+		// readSettings()
+
+		val indexData = App.app.assets.open("data/index.new.json").use {
+			it.bufferedReader().readText()
+		}
+		val index = JSONObject(indexData)
+		val catsData = index.getJSONArray("cats") ?: JSONArray()
+		val articlesData = index.getJSONArray("pages") ?: JSONArray()
+		// val pathsData = index.getJSONArray("paths")
+
+		cats.addAll((0 until catsData.length())
+			.asSequence()
+			.map { catsData.getJSONObject(it) }
+			.map(::Category)
+			.onEach {
+				Log.e("data.cat", it.toString())
+			})
+
+		articles.addAll((0 until articlesData.length())
+			.asSequence()
+			.map { articlesData.getJSONObject(it) }
+			.map(::Article)
+			.onEach {
+				Log.e("data.article", it.toString())
+			})
 	}
 
 	fun observeSettings(owner: Fragment, observer: (Settings) -> Unit) {
@@ -96,52 +117,4 @@ object Repository {
 		return true
 	}
 
-
-	private fun readBookmarks() {
-		val pref = App.app.defaultSharedPreferences
-		val bookmarks = (pref.getString(PREF_BOOKMARKS, null) ?: "")
-			.split(",")
-			.tryMap(String::toInt)
-			.filterNotNull()
-			.toSet()
-		bookmarksLiveData.postValue(bookmarks)
-	}
-
-	private fun setBookmarks(bookmarks: Set<Int>) {
-		bookmarksLiveData.postValue(bookmarks)
-
-		val pref = App.app.defaultSharedPreferences
-		pref.edit().putString(PREF_BOOKMARKS, bookmarks.joinToString(",")).apply()
-	}
-
-	fun setBookmark(storyId: Int, bookmark: Boolean) {
-		val bookmarks = bookmarks
-		if (bookmark) {
-			setBookmarks(
-				bookmarks + storyId
-			)
-		} else {
-			setBookmarks(
-				bookmarks - storyId
-			)
-		}
-	}
-
-	fun toggleBookmark(storyId: Int) {
-		val bookmarks = bookmarks
-		if (bookmarks.contains(storyId)) {
-			setBookmarks(
-				bookmarks - storyId
-			)
-		} else {
-			setBookmarks(
-				bookmarks + storyId
-			)
-		}
-	}
-
-	fun isBookmark(storyId: Int): Boolean {
-		val bookmarks = bookmarks
-		return bookmarks.contains(storyId)
-	}
 }

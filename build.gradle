@@ -52,14 +52,14 @@ android {
 		minSdkVersion Versions.App.minSdk
 		targetSdkVersion Versions.App.targetSdk
 
-		applicationId 'ir.hco.appian.app'
+		applicationId 'ir.hco.appian.poem.foroog'
 		versionCode 101
 		versionName '01.01'
 
 		resConfigs 'en'
 		vectorDrawables.useSupportLibrary true
 
-		buildConfigField 'String', 'APP_LINK', '"bit.ly/*"'
+		buildConfigField 'String', 'APP_LINK', '"bit.ly/poemForoog"'
 
 		//buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
 		//buildConfigField 'String', 'DEVELOPER_TITLE', '"HossainCo"'
@@ -130,6 +130,11 @@ dependencies {
 	implementation Deps.lifecycle_extensions
 	implementation Deps.lifecycle_viewmodel_ktx
 	kapt Deps.lifecycle_compiler
+
+	implementation Deps.pushe
+
+	googlePlayImplementation 'com.startapp:inapp-sdk:3.12.3'
+	bazaarImplementation 'com.appbrain:appbrain-sdk:+@aar'
 
 	implementation project(':lib-util')
 }

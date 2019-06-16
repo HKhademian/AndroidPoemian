@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Appian</string>
+	<string name="app_name">فروغ</string>
 	<string name="app_title">@string/app_name</string>
-	<string name="app_subtitle">Collection of well designed apps</string>
+	<string name="app_subtitle">مجموعه اشعار فروغ فرخزاد</string>
 
 	<string name="item_share">اشتراک گذاری</string>
 	<string name="item_copy">کپی</string>

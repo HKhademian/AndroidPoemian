@@ -7,6 +7,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.ViewManager
 import androidx.cardview.widget.CardView
+import ir.hco.appian.app.MainApp
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Repository
@@ -47,17 +48,17 @@ internal class HomeUI : AnkoComponent<HomePage> {
 				margin = context.dip(4)
 			}
 
-			spliter ()
-			spliter ()
-			spliter ()
+			spliter()
+			spliter()
+			spliter()
 
 			Repository.cats.filter { it.parentId == "0" }.forEach {
 				category(ui, it, 0)
 			}
 
-			spliter ()
-			spliter ()
-			spliter ()
+			spliter()
+			spliter()
+			spliter()
 
 			item(ui.owner, titleRes = R.string.item_bookmarks, iconRes = R.mipmap.ic_launcher_round)
 				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {

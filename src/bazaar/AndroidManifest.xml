@@ -4,9 +4,19 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	package="ir.hco.appian.app">
 
+	<!-- Magnet Ads -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
+
 	<application
 		android:name=".MarketApp"
 		tools:replace="android:name"
-		tools:ignore="GoogleAppIndexingWarning"/>
+		tools:ignore="GoogleAppIndexingWarning">
+		<activity
+			android:name="com.magnetadservices.sdk.MagnetInterstitialActivity"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			android:configChanges="orientation|screenSize|keyboardHidden"
+			android:hardwareAccelerated="true"/>
+	</application>
 
 </manifest>

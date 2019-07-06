@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProviders
+import ir.hco.appian.app.MainApp
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Repository
 import ir.hco.appian.page.BasePage
@@ -41,7 +42,7 @@ class ArticleDetailPage() : BasePage() {
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val context = context!!
 		return ArticleDetailUI().createView(AnkoContext.create(context, this, false)).also { view ->
-//			val titleView = view.findViewById<TextView>(R.id.title)
+			//			val titleView = view.findViewById<TextView>(R.id.title)
 //			val subtitleView = view.findViewById<TextView>(R.id.subtitle)
 			val textView = view.findViewById<TextView>(R.id.text)
 
@@ -52,5 +53,10 @@ class ArticleDetailPage() : BasePage() {
 //			subtitleView.text = category.title
 			textView.text = article.text
 		}
+	}
+
+	override fun onStart() {
+		super.onStart()
+		(context?.applicationContext as? MainApp)?.mayShowInterstitial()
 	}
 }

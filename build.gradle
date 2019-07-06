@@ -89,21 +89,16 @@ android {
 		googlePlay {
 			dimension 'market'
 			versionNameSuffix '-play'
-			//buildConfigField 'String', 'START_APP_AD_ID', '"204084927"'
-
-			//buildConfigField 'String', 'START_APP_AD_ID', '"203420214"'
-			//applicationId 'ir.hossainco.fal.hafiz'
 		}
 		bazaar {
 			dimension 'market'
 			versionNameSuffix '-bazaar'
+//			buildConfigField 'String', 'ADAD_APP_TOKEN', '"a1b66a0e-1db8-4d3a-9c00-5b834954a6bc"'
+//			buildConfigField 'String', 'ADAD_AD_TOKEN', '"b7d2984d-7c9c-4dbf-bf96-b750d320f69b"'
+			buildConfigField 'String', 'MAGNET_BANNER_AD_TOKEN', '"6f8a2e3bfbdf08d6a1412778607d7723"'
+			buildConfigField 'String', 'MAGNET_INTERSTITIAL_AD_TOKEN', '"40439f23fbe108d6b6ec699fee5173af"'
 		}
 	}
-
-//	compileOptions {
-//		sourceCompatibility 'JavaVersion.VERSION_1_8'
-//		targetCompatibility 'JavaVersion.VERSION_1_8'
-//	}
 
 	packagingOptions {
 		exclude '/kotlin_metadata/**'
@@ -138,4 +133,14 @@ dependencies {
 
 	implementation project(':lib-util')
 	implementation project(':lib-appian')
+
+//	bazaarImplementation 'com.android.support:support-v4:28.0.0'
+//	bazaarImplementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+//	bazaarImplementation 'com.goebl:david-webb:1.3.0'
+//	bazaarImplementation(name: 'adad-sdk-core-5.1.1', ext: 'aar')
+//	bazaarImplementation(name: 'adad-sdk-ad-5.1.1', ext: 'aar')
+//	bazaarImplementation(name: 'adad-sdk-banner-5.1.1', ext: 'aar')
+
+	bazaarImplementation files('libs/magnet-android-sdk-5.0.7.jar')
+
 }

@@ -30,9 +30,6 @@ allprojects {
 	}
 }
 
-//task clean(type: Delete) {
-//	delete rootProject.buildDir
-//}
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -79,8 +76,8 @@ android {
 			signingConfig signingConfigs.debug
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
 				'proguard-rules.pro',
-				'../../proguard-flatten.pro',
-				'../../proguard-dictionary.pro'
+				'proguard-flatten.pro',
+				'proguard-dictionary.pro'
 		}
 	}
 
@@ -89,10 +86,14 @@ android {
 		googlePlay {
 			dimension 'market'
 			versionNameSuffix '-play'
+
+			buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
 		}
 		bazaar {
 			dimension 'market'
 			versionNameSuffix '-bazaar'
+
+			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'
 //			buildConfigField 'String', 'ADAD_APP_TOKEN', '"a1b66a0e-1db8-4d3a-9c00-5b834954a6bc"'
 //			buildConfigField 'String', 'ADAD_AD_TOKEN', '"b7d2984d-7c9c-4dbf-bf96-b750d320f69b"'
 			buildConfigField 'String', 'MAGNET_BANNER_AD_TOKEN', '"6f8a2e3bfbdf08d6a1412778607d7723"'

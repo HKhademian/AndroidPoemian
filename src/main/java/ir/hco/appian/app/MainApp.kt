@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.view.View
 import android.view.ViewManager
 import ir.hco.appian.app.data.Repository
+import ir.hco.appian.utils.Publisher
 import ir.hossainco.utils.App
 import ir.hossainco.utils.packages.setLocale
 import ir.hossainco.utils.tryOrDefault
@@ -12,8 +13,9 @@ import ir.hossainco.utils.ui.setDefaultTypefaces
 import org.jetbrains.anko.view
 import java.util.*
 
-open class MainApp : Application() {
+abstract class MainApp : Application() {
 	private var lastAdShown = 0L
+	abstract val publisher: Publisher
 
 	companion object {
 		private const val MIN_AD_GAP = 2 * 60 * 1000

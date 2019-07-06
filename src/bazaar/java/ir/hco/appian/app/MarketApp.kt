@@ -1,16 +1,19 @@
 package ir.hco.appian.app
 
-//import ir.adad.banner.AdadBannerAd
-//import ir.adad.core.Adad
 import android.view.View
 import android.view.ViewManager
-import com.magnetadservices.sdk.MagnetAdLoadListener
 import com.magnetadservices.sdk.MagnetInterstitialAd
 import com.magnetadservices.sdk.MagnetMobileBannerAd
 import com.magnetadservices.sdk.MagnetSDK
+import ir.hco.appian.utils.BazaarPublisher
 import org.jetbrains.anko.frameLayout
 
 class MarketApp : MainApp() {
+	override val publisher = BazaarPublisher(
+		developerId = BuildConfig.DEVELOPER_ID,
+		forceMarket = false
+	)
+
 	private var interstitialAd: MagnetInterstitialAd? = null
 	private val bannerAd by lazy {
 		MagnetMobileBannerAd.create(applicationContext)

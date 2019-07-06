@@ -7,7 +7,6 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.ViewManager
 import androidx.cardview.widget.CardView
-import ir.hco.appian.app.MainApp
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Repository

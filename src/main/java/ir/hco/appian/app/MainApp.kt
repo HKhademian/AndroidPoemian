@@ -13,7 +13,10 @@ import org.jetbrains.anko.view
 import java.util.*
 
 open class MainApp : Application() {
+	private var lastAdShown = 0L
+
 	companion object {
+		private const val MIN_AD_GAP = 2 * 60 * 1000
 		private val LOCALE = Locale("fa-US")
 	}
 
@@ -44,4 +47,24 @@ open class MainApp : Application() {
 
 	open fun createBanner(vm: ViewManager, init: View.() -> Unit = {}): View =
 		vm.view()
+
+	open fun hasInterstitial() =
+		false
+
+	open fun showInterstitial(): Boolean =
+		false
+
+	open fun mayShowInterstitial(): Boolean {
+		val now = System.currentTimeMillis()
+		if (now - lastAdShown > MIN_AD_GAP && (Math.random() * 100) < 30) {
+			if (hasInterstitial()) {
+				val res = showInterstitial()
+				if (res) {
+					lastAdShown = System.currentTimeMillis()
+				}
+				return res
+			}
+		}
+		return false
+	}
 }

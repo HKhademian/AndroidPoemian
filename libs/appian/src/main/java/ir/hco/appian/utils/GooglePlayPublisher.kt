@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 
-abstract class GooglePlayPublisher : Publisher {
-	protected abstract val developerId: String
-	protected open val forceMarket: Boolean = false
-
+class GooglePlayPublisher(
+	private val developerId: String,
+	private val forceMarket: Boolean = false
+) : Publisher {
 	override fun createDeveloperPageIntent() =
 		Intent(Intent.ACTION_VIEW).apply {
 			data = Uri.parse("https://play.google.com/store/apps/developer?id=$developerId")

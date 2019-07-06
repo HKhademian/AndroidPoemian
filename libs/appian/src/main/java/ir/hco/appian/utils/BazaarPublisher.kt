@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 
-abstract class BazaarPublisher : Publisher {
-	protected abstract val developerId: String
-	protected open val forceMarket: Boolean = false
-
+class BazaarPublisher(
+	private val developerId: String,
+	private val forceMarket: Boolean = false
+) : Publisher {
 	override fun createDeveloperPageIntent() =
 		Intent(Intent.ACTION_VIEW).apply {
 			data = Uri.parse("https://cafebazaar.ir/developer/$developerId")

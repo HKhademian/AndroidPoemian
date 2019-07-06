@@ -30,9 +30,6 @@ allprojects {
 	}
 }
 
-//task clean(type: Delete) {
-//	delete rootProject.buildDir
-//}
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -79,8 +76,8 @@ android {
 			signingConfig signingConfigs.debug
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
 				'proguard-rules.pro',
-				'../../proguard-flatten.pro',
-				'../../proguard-dictionary.pro'
+				'proguard-flatten.pro',
+				'proguard-dictionary.pro'
 		}
 	}
 
@@ -89,21 +86,12 @@ android {
 		googlePlay {
 			dimension 'market'
 			versionNameSuffix '-play'
-			//buildConfigField 'String', 'START_APP_AD_ID', '"204084927"'
-
-			//buildConfigField 'String', 'START_APP_AD_ID', '"203420214"'
-			//applicationId 'ir.hossainco.fal.hafiz'
 		}
 		bazaar {
 			dimension 'market'
 			versionNameSuffix '-bazaar'
 		}
 	}
-
-//	compileOptions {
-//		sourceCompatibility 'JavaVersion.VERSION_1_8'
-//		targetCompatibility 'JavaVersion.VERSION_1_8'
-//	}
 
 	packagingOptions {
 		exclude '/kotlin_metadata/**'

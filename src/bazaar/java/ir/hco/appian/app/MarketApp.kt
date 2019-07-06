@@ -1,9 +1,10 @@
 package ir.hco.appian.app
 
-class MarketApp : MainApp() {
-	// override fun initAds() {
-	// }
+import ir.hco.appian.utils.BazaarPublisher
 
-	// override fun createBanner(vm: ViewManager, init: View.() -> Unit) = with(vm) {
-	// }
+class MarketApp : MainApp() {
+	override val publisher = BazaarPublisher(
+		developerId = BuildConfig.DEVELOPER_ID,
+		forceMarket = false
+	)
 }

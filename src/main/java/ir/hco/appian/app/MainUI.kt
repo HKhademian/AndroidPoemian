@@ -8,7 +8,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import ir.hco.appian.app.data.Repository
-import ir.hco.appian.app.utils.views.drawer
+import ir.hco.appian.utils.views.drawer
 import ir.hossainco.utils.App
 import ir.hossainco.utils.view.appTextView
 import ir.hossainco.utils.view.factory

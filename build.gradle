@@ -86,10 +86,14 @@ android {
 		googlePlay {
 			dimension 'market'
 			versionNameSuffix '-play'
+
+			buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
 		}
 		bazaar {
 			dimension 'market'
 			versionNameSuffix '-bazaar'
+
+			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'
 		}
 	}
 

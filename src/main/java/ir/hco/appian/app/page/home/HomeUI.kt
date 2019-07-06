@@ -3,8 +3,8 @@ package ir.hco.appian.app.page.home
 import android.view.Gravity
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import ir.hco.appian.app.R
-import ir.hco.appian.app.utils.views.myCardView
-import ir.hco.appian.app.utils.views.myTextView
+import ir.hco.appian.utils.views.myCardView
+import ir.hco.appian.utils.views.myTextView
 import ir.hossainco.utils.ui.TextSize
 import ir.hossainco.utils.view.spliter
 import ir.hossainco.utils.view.verticalScrollView

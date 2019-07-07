@@ -1,19 +1,28 @@
 package ir.hco.appian.app.page.home
 
+import android.content.Intent.createChooser
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.transaction
 import androidx.lifecycle.ViewModelProviders
+import ir.hco.appian.app.MainApp
 import ir.hco.appian.app.R
+import ir.hco.appian.app.data.Article
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Query
-import ir.hco.appian.page.BasePage
 import ir.hco.appian.app.page.articleDetail.ArticleDetailPage
-import ir.hco.appian.app.page.articleList.ArticleListPage
+import ir.hco.appian.app.page.poemList.ArticleListPage
+import ir.hco.appian.page.BasePage
+import ir.hossainco.utils.App
+import ir.hossainco.utils.packages.startNewTask
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.toast
 
 class HomePage : BasePage() {
+	companion object {
+		private const val EXTRA_EXPANDED_ITEM_IDS = "expandedItemIds"
+	}
+
 	private val viewModel by lazy {
 		ViewModelProviders.of(this)[HomeViewModel::class.java]
 	}
@@ -21,8 +30,15 @@ class HomePage : BasePage() {
 	override val title: String?
 		get() = context!!.getString(R.string.app_subtitle)
 
+	val expandedItemIds = HashSet<String>()
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		if (savedInstanceState != null) {
+			expandedItemIds.addAll(
+				savedInstanceState.getSerializable(EXTRA_EXPANDED_ITEM_IDS) as HashSet<String>
+			)
+		}
 		setHasOptionsMenu(true)
 	}
 
@@ -34,6 +50,27 @@ class HomePage : BasePage() {
 	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 		super.onCreateOptionsMenu(menu, inflater)
 		inflater.inflate(R.menu.menu_home, menu)
+	}
+
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		return when (item.itemId) {
+//			R.id.item_apps -> {
+//				onClickOtherApps(null)
+//				true
+//			}
+
+			R.id.item_rate -> {
+				onClickRate(null)
+				true
+			}
+
+			else -> super.onOptionsItemSelected(item)
+		}
+	}
+
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
+		outState.putSerializable(EXTRA_EXPANDED_ITEM_IDS, expandedItemIds)
 	}
 
 	fun onClickCategory(it: Category) {
@@ -53,5 +90,51 @@ class HomePage : BasePage() {
 				addToBackStack("articleList")
 			}
 		}
+	}
+
+	fun onItemExpand(view: View, category: Category, isExpanded: Boolean) {
+		if (isExpanded)
+			expandedItemIds.add(category.id)
+		else
+			expandedItemIds.remove(category.id)
+	}
+
+	fun onClickBookmarks(it: View?) {
+		fragmentManager?.transaction {
+			replace(R.id.fragment, ArticleListPage(Query.BookmarkQuery))
+			addToBackStack("bookmarks")
+		}
+	}
+
+	fun onClickReferences(it: View?) {
+		fragmentManager?.transaction {
+			replace(R.id.fragment, ArticleDetailPage(Article.ReferencesArticle))
+			addToBackStack("references")
+		}
+
+	}
+
+//	fun onClickSettings(it: View?) {
+//
+//	}
+
+//	fun onClickAbout(it: View?) {
+//
+//	}
+
+	fun onClickOtherApps(it: View?) {
+		val context = context ?: return
+		createChooser(
+			(App.app as MainApp).publisher.createDeveloperPageIntent(),
+			context.getString(R.string.title_chooser)
+		).startNewTask(context)
+	}
+
+	fun onClickRate(it: View?) {
+		val context = context ?: return
+		createChooser(
+			(App.app as MainApp).publisher.createAppRatePageIntent(context),
+			context.getString(R.string.title_chooser)
+		).startNewTask(context)
 	}
 }

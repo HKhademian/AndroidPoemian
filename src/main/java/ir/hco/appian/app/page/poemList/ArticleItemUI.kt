@@ -1,4 +1,4 @@
-package ir.hco.appian.app.page.articleList
+package ir.hco.appian.app.page.poemList
 
 import android.graphics.Color
 import android.view.Gravity.*

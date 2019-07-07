@@ -1,12 +1,14 @@
 package ir.hco.appian.app.page.home
 
+import android.graphics.Color
 import android.view.Gravity.CENTER
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.ViewManager
+import android.widget.ImageView
 import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Repository
@@ -25,15 +27,18 @@ internal class HomeUI : AnkoComponent<HomePage> {
 		val context = ui.ctx
 
 		verticalScrollView {
+			id = R.id.list
 			padding = dip(8)
 
 			myCardView(owner) {
 				verticalLayout {
-					padding = dip(8)
+					radius = 16f
 					gravity = CENTER
 
-					imageView(R.mipmap.ic_launcher_round)
-						.lparams(width = dip(96), height = dip(96))
+					imageView(R.drawable.foroog) {
+						backgroundColor = Color.BLACK
+						scaleType = ImageView.ScaleType.CENTER_CROP
+					}.lparams(width = MATCH_PARENT, height = dip(256))
 
 					myTextView(owner, textRes = R.string.app_title, textSize = TextSize.ExtraLargeTextSize) {
 						gravity = CENTER
@@ -47,8 +52,16 @@ internal class HomeUI : AnkoComponent<HomePage> {
 				margin = context.dip(4)
 			}
 
-			spliter()
-			spliter()
+			item(ui.owner, titleRes = R.string.item_bookmarks, iconRes = R.drawable.ic_bookmark) {
+				Repository.bookmarksLiveData.observe(ui.owner, Observer {
+					isVisible = !it.isNullOrEmpty()
+				})
+			}.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
+				margin = context.dip(4)
+			}.setOnClickListener {
+				ui.owner.onClickBookmarks(it)
+			}
+
 			spliter()
 
 			Repository.cats.filter { it.parentId == "0" }.forEach {
@@ -56,22 +69,40 @@ internal class HomeUI : AnkoComponent<HomePage> {
 			}
 
 			spliter()
-			spliter()
-			spliter()
 
-			item(ui.owner, titleRes = R.string.item_bookmarks, iconRes = R.mipmap.ic_launcher_round)
+//			item(ui.owner, titleRes = R.string.item_settings, iconRes = R.mipmap.ic_launcher_round)
+//				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
+//					margin = context.dip(4)
+//				}.setOnClickListener {
+//					ui.owner.onClickSettings(it)
+//				}
+
+			item(ui.owner, titleRes = R.string.item_references, iconRes = R.drawable.ic_references)
 				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 					margin = context.dip(4)
+				}.setOnClickListener {
+					ui.owner.onClickReferences(it)
 				}
 
-			item(ui.owner, titleRes = R.string.item_settings, iconRes = R.mipmap.ic_launcher_round)
+//			item(ui.owner, titleRes = R.string.item_about_us, iconRes = R.mipmap.ic_launcher_round)
+//				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
+//					margin = context.dip(4)
+//				}.setOnClickListener {
+//					ui.owner.onClickAbout(it)
+//				}
+
+			item(ui.owner, titleRes = R.string.item_apps, iconRes = R.drawable.ic_other_apps)
 				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 					margin = context.dip(4)
+				}.setOnClickListener {
+					ui.owner.onClickOtherApps(it)
 				}
 
-			item(ui.owner, titleRes = R.string.item_about_us, iconRes = R.mipmap.ic_launcher_round)
+			item(ui.owner, titleRes = R.string.item_rate, iconRes = R.drawable.ic_vote)
 				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 					margin = context.dip(4)
+				}.setOnClickListener {
+					ui.owner.onClickRate(it)
 				}
 		}
 	}
@@ -80,7 +111,7 @@ internal class HomeUI : AnkoComponent<HomePage> {
 		val context = context
 		val subCategories = Repository.cats.filter { it.parentId == category.id }
 
-		val view = item(ui.owner, title = category.title, iconRes = R.mipmap.ic_launcher_round)
+		val view = item(ui.owner, title = category.title, iconRes = R.mipmap.ic_launcher)
 			.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 				margin = context.dip(4)
 			}
@@ -91,7 +122,7 @@ internal class HomeUI : AnkoComponent<HomePage> {
 			}
 		} else {
 			val subView = verticalLayout {
-				visibility = GONE
+				isVisible = category.id in ui.owner.expandedItemIds
 				topPadding = 0
 				bottomPadding = context.dip(16)
 				leftPadding = context.dip(16)
@@ -103,7 +134,9 @@ internal class HomeUI : AnkoComponent<HomePage> {
 			}
 
 			view.setOnClickListener {
-				subView.visibility = if (subView.visibility == VISIBLE) GONE else VISIBLE
+				val isVisible = subView.isVisible
+				subView.isVisible = !isVisible
+				ui.owner.onItemExpand(view, category, !isVisible)
 			}
 		}
 

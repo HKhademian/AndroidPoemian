@@ -6,6 +6,7 @@
 	<item name="side" type="id"/>
 
 	<item name="recycler" type="id"/>
+	<item name="list" type="id"/>
 
 	<item name="button" type="id"/>
 	<item name="title" type="id"/>

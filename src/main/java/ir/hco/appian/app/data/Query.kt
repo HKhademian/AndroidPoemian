@@ -11,7 +11,7 @@ interface Query : Serializable {
 		override val title = null
 
 		private val query =
-			Repository.articles.map { it.id }
+			Repository.poems.map { it.id }
 
 		override val itemIds
 			get() = query
@@ -21,11 +21,11 @@ interface Query : Serializable {
 	}
 
 	object BookmarkQuery : Query {
-		override val title = "نشان گذاری شده"
+		override val title = "نشان گذاری ها"
 
 		private val query =
-			Repository.articles
-				// .filter { it.bookmark }
+			Repository.poems
+				.filter { it.bookmark }
 				.map { it.id }
 
 		override val itemIds
@@ -39,7 +39,7 @@ interface Query : Serializable {
 		override val title get() = "دسته ${Repository.cats.firstOrNull { it.id == catId }?.title}"
 
 		private val query =
-			Repository.articles
+			Repository.poems
 				.filter { it.parentId == catId }
 				.map { it.id }
 

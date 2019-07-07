@@ -21,7 +21,7 @@ class MarketApp : MainApp() {
 
 	override fun initAds() {
 		MagnetSDK.initialize(applicationContext)
-		MagnetSDK.getSettings().setTestMode(true)
+		MagnetSDK.getSettings().setTestMode(BuildConfig.DEBUG)
 		loadInterstitial()
 	}
 

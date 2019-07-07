@@ -129,19 +129,10 @@ dependencies {
 
 	// implementation Deps.pushe
 
-	// googlePlayImplementation 'com.startapp:inapp-sdk:3.12.3'
-	// bazaarImplementation 'com.appbrain:appbrain-sdk:+@aar'
-
 	implementation project(':lib-util')
 	implementation project(':lib-appian')
 
-//	bazaarImplementation 'com.android.support:support-v4:28.0.0'
-//	bazaarImplementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
-//	bazaarImplementation 'com.goebl:david-webb:1.3.0'
-//	bazaarImplementation(name: 'adad-sdk-core-5.1.1', ext: 'aar')
-//	bazaarImplementation(name: 'adad-sdk-ad-5.1.1', ext: 'aar')
-//	bazaarImplementation(name: 'adad-sdk-banner-5.1.1', ext: 'aar')
-
+	googlePlayImplementation Deps.appbrain
 	bazaarImplementation files('libs/magnet-android-sdk-5.0.7.jar')
 
 }

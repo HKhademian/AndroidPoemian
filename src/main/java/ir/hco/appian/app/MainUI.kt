@@ -93,7 +93,7 @@ internal class MainUI : AnkoComponent<MainActivity> {
 
 				(App.app as MainApp).createBanner(this)
 					.lparams(width = MATCH_PARENT, height = WRAP_CONTENT, gravity = CENTER)
-			}.lparams(width = MATCH_PARENT, height = dip(50))
+			}.lparams(width = MATCH_PARENT, height = WRAP_CONTENT)
 		}
 	}
 

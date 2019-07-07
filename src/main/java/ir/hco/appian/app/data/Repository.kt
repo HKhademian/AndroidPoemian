@@ -5,25 +5,31 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import ir.hossainco.utils.App
+import org.jetbrains.anko.defaultSharedPreferences
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.math.max
 import kotlin.math.min
 
 object Repository {
+	private const val PREF_BOOKMARKS = "bookmarks"
 	private const val FONT_SIZE_MUL_MAX = 2f
 	private const val FONT_SIZE_MUL_MIN = 0.5f
 
 	private val DEFAULT_SETTINGS = Settings()
+	private val DEFAULT_BOOKMARKS = emptySet<String>()
 
 	val settingsLiveData = MutableLiveData<Settings>().apply { value = DEFAULT_SETTINGS }
 	val settings get() = settingsLiveData.value ?: DEFAULT_SETTINGS
 
+	val bookmarksLiveData = MutableLiveData<Set<String>>().apply { value = DEFAULT_BOOKMARKS }
+	val bookmarks get() = bookmarksLiveData.value ?: DEFAULT_BOOKMARKS
+
 	val cats = mutableListOf<Category>()
-	val articles = mutableListOf<Article>()
-	// val paths = mutableListOf<String>()
+	val poems = mutableListOf<Poem>()
 
 	fun init() {
+		readBookmarks()
 		// readSettings()
 
 		val indexData = App.app.assets.open("data/index.new.json").use {
@@ -42,13 +48,23 @@ object Repository {
 				Log.e("data.cat", it.toString())
 			})
 
-		articles.addAll((0 until articlesData.length())
+		var i = 0
+		(0 until articlesData.length())
 			.asSequence()
-			.map { articlesData.getJSONObject(it) }
-			.map(::Article)
+			.map {
+				articlesData.getJSONObject(it)
+			}
+			.map { json ->
+				val poem = Poem(json)
+				return@map if (poems.any { it.id == poem.id })
+					Poem(poem, id = "${poem.id}-${i++}")
+				else poem
+			}
 			.onEach {
-				Log.e("data.article", it.toString())
-			})
+				poems.add(it)
+				Log.e("data.poem", it.toString())
+			}
+			.count()
 	}
 
 	fun observeSettings(owner: Fragment, observer: (Settings) -> Unit) {
@@ -115,6 +131,57 @@ object Repository {
 			)
 		)
 		return true
+	}
+
+	private fun readBookmarks() {
+		val pref = App.app.defaultSharedPreferences
+		val bookmarks = (pref.getString(PREF_BOOKMARKS, null) ?: "")
+			.split("\n")
+			.filter { it.isNotBlank() }
+			.toSet()
+		bookmarksLiveData.postValue(bookmarks)
+	}
+
+	private fun setBookmarks(bookmarks: Set<String>) {
+		bookmarksLiveData.postValue(bookmarks)
+
+		val pref = App.app.defaultSharedPreferences
+		pref.edit().putString(PREF_BOOKMARKS, bookmarks.joinToString("\n")).apply()
+	}
+
+	fun setBookmark(storyId: String, bookmark: Boolean) {
+		val bookmarks = bookmarks
+		if (bookmark) {
+			setBookmarks(
+				bookmarks + storyId
+			)
+		} else {
+			setBookmarks(
+				bookmarks - storyId
+			)
+		}
+	}
+
+	fun toggleBookmark(storyId: String) {
+		val bookmarks = bookmarks
+		if (storyId in bookmarks) {
+			setBookmarks(
+				bookmarks - storyId
+			)
+		} else {
+			setBookmarks(
+				bookmarks + storyId
+			)
+		}
+	}
+
+	fun isBookmark(storyId: String): Boolean {
+		val bookmarks = bookmarks
+		return (storyId in bookmarks)
+	}
+
+	fun getPoemById(poemId: String): Poem {
+		return poems.first { it.id == poemId }
 	}
 
 }

@@ -1,4 +1,4 @@
-package ir.hco.appian.app.page.articleList
+package ir.hco.appian.app.page.poemList
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,7 +7,7 @@ import org.jetbrains.anko.AnkoContext
 
 internal class ArticleAdapter(
 	internal val page: ArticleListPage,
-	val itemIds: List<String> = Repository.articles.map { it.id }
+	val itemIds: List<String> = Repository.poems.map { it.id }
 ) : RecyclerView.Adapter<ArticleItemViewHolder>() {
 
 	override fun getItemCount() =

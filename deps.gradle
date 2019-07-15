@@ -34,6 +34,8 @@ ext {
 
 		// pushe               : '1.4.3',
 		pushe               : '2.0.0-beta01',
+
+		pufferdb            : '1.0.1',
 	]
 
 	Deps = [
@@ -71,8 +73,11 @@ ext {
 		firebaseMessaging      : "com.google.firebase:firebase-messaging:${Versions.firebaseMessaging}",
 		crashlytics            : "com.crashlytics.sdk.android:crashlytics:${Versions.crashlytics}",
 
-		// pushe              : "co.ronash.android:pushe-base:${Versions.pushe}",
+		// pushe               : "co.ronash.android:pushe-base:${Versions.pushe}",
 		pushe                  : "co.ronash.pushe:base:${Versions.pushe}",
+
+		pufferdb               : "com.github.adrielcafe.pufferdb:core:${Versions.pufferdb}",
+		pufferdbCoroutines     : "com.github.adrielcafe.pufferdb:coroutines:${Versions.pufferdb}",
 
 	]
 }

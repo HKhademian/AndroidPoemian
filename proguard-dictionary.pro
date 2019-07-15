@@ -1,3 +1,0 @@
--obfuscationdictionary proguard-chinese.dic
--packageobfuscationdictionary proguard-chinese.dic
--classobfuscationdictionary proguard-chinese.dic

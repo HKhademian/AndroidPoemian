@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-		<item name="colorPrimary">@color/primaryColor</item>
-		<item name="colorPrimaryDark">@color/primaryDarkColor</item>
-		<item name="colorAccent">@color/secondaryColor</item>
-	</style>
+	<!--<style name="AppTheme" parent="Theme.AppCompat.Light">-->
+		<!--<item name="colorPrimary">@color/primaryColor</item>-->
+		<!--<item name="colorPrimaryDark">@color/primaryDarkColor</item>-->
+		<!--<item name="colorAccent">@color/secondaryColor</item>-->
+	<!--</style>-->
+	<!--<style name="AppTheme.NoTitleBar" parent="Theme.AppCompat.Light.NoActionBar">-->
+		<!--<item name="colorPrimary">@color/primaryColor</item>-->
+		<!--<item name="colorPrimaryDark">@color/primaryDarkColor</item>-->
+		<!--<item name="colorAccent">@color/secondaryColor</item>-->
+	<!--</style>-->
 </resources>

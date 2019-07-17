@@ -1,6 +1,5 @@
 package ir.hco.appian.app.page.home
 
-import ir.hossainco.utils.view.spliter
 import ir.hossainco.utils.view.verticalScrollView
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.AnkoContext
@@ -10,8 +9,6 @@ internal class HomeUI : AnkoComponent<HomePage> {
 		val context = ui.ctx
 
 		verticalScrollView {
-
-			spliter()
 
 		}
 	}

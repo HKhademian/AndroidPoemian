@@ -14,7 +14,9 @@
 	<item name="text" type="id"/>
 	<item name="index" type="id"/>
 	<item name="bookmark" type="id"/>
+	<item name="image" type="id"/>
 
+	<item name="ads" type="id"/>
 	<item name="ad_icon" type="id"/>
 	<item name="ad_title" type="id"/>
 </resources>

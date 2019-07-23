@@ -46,7 +46,7 @@ abstract class BaseApp : Application() {
 	}
 
 	protected open fun initAdvertiser() {
-		advertiser.init()
+		advertiser.init(applicationContext)
 	}
 
 	protected open fun initRepository() {

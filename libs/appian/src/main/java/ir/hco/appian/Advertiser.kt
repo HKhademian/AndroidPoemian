@@ -1,11 +1,12 @@
 package ir.hco.appian
 
+import android.content.Context
 import android.view.View
 import android.view.ViewManager
 import org.jetbrains.anko.frameLayout
 
 interface Advertiser {
-	fun init()
+	fun init(context: Context)
 
 
 	fun hasBanner(): Boolean
@@ -25,9 +26,9 @@ open class BaseAdvertiser : Advertiser {
 		private const val MIN_AD_GAP = 2 * 60 * 1000
 	}
 
-	private var lastAdShown = System.currentTimeMillis();
+	private var lastAdShown = System.currentTimeMillis()
 
-	override fun init() =
+	override fun init(context: Context) =
 		Unit
 
 	override fun hasBanner() =

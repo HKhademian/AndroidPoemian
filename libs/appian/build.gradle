@@ -28,6 +28,8 @@ dependencies {
 	api Deps.core_ktx
 	api Deps.fragment
 	api Deps.fragment_ktx
+	implementation Deps.recyclerview
+	implementation Deps.cardview
 
 	api project(':lib-util')
 

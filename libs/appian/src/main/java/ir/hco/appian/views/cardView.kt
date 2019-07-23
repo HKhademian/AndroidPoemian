@@ -1,13 +1,13 @@
-// @file:Suppress("PackageDirectoryMismatch")
+ @file:Suppress("PackageDirectoryMismatch")
 
-// package ir.hco.appian.views
+ package ir.hco.appian.views
 
-// import android.view.ViewManager
-// import androidx.cardview.widget.CardView
-// import ir.hossainco.utils.view.factory
+ import android.view.ViewManager
+ import androidx.cardview.widget.CardView
+ import ir.hossainco.utils.view.factory
 
-// fun ViewManager.cardView(
-// 	theme: Int = 0,
-// 	init: CardView.() -> Unit
-// ) =
-// 	factory(::CardView, theme = theme, init = init)
+ fun ViewManager.cardView(
+ 	theme: Int = 0,
+ 	init: CardView.() -> Unit
+ ) =
+ 	factory(::CardView, theme = theme, init = init)

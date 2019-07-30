@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 
 interface Publisher {
-	fun init()
+	fun init(context: Context) = Unit
 
 	fun createDeveloperPageIntent(): Intent
 
@@ -16,8 +16,6 @@ open class BazaarPublisher(
 	private val developerId: String,
 	private val forceMarket: Boolean = false
 ) : Publisher {
-	override fun init() = Unit
-
 	override fun createDeveloperPageIntent() =
 		Intent(Intent.ACTION_VIEW).apply {
 			data = Uri.parse("https://cafebazaar.ir/developer/$developerId")
@@ -39,8 +37,6 @@ open class GooglePlayPublisher(
 	private val developerId: String,
 	private val forceMarket: Boolean = false
 ) : Publisher {
-	override fun init() = Unit
-
 	override fun createDeveloperPageIntent() =
 		Intent(Intent.ACTION_VIEW).apply {
 			data = Uri.parse("https://play.google.com/store/apps/developer?id=$developerId")

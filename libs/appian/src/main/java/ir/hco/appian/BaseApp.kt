@@ -17,7 +17,7 @@ abstract class BaseApp : Application() {
 
 	@Suppress("LeakingThis")
 	open val logger: Logger = FirebaseLogger(this)
-	open val advertiser: Advertiser = BaseAdvertiser()
+	open val advertiser: Advertiser = Advertiser.DEFAULT
 	abstract val publisher: Publisher
 
 	override fun onCreate() {
@@ -38,15 +38,15 @@ abstract class BaseApp : Application() {
 	}
 
 	protected open fun initLogger() {
-		logger.init()
+		logger.init(applicationContext)
 	}
 
 	protected open fun initPublisher() {
-		publisher.init()
+		publisher.init(applicationContext)
 	}
 
 	protected open fun initAdvertiser() {
-		advertiser.init()
+		advertiser.init(applicationContext)
 	}
 
 	protected open fun initRepository() {
@@ -56,6 +56,10 @@ abstract class BaseApp : Application() {
 	}
 
 	protected open fun initFonts() {
+		loadFonts()
+	}
+
+	open fun loadFonts() {
 		val (sans, serif) = arrayOf(
 			tryOrDefault(Typeface.SANS_SERIF) { Typeface.createFromAsset(assets, "fonts/iransans_light.ttf") },
 			tryOrDefault(Typeface.SERIF) { Typeface.createFromAsset(assets, "fonts/byekan.ttf") }

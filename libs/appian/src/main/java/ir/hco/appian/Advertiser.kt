@@ -1,58 +1,70 @@
 package ir.hco.appian
 
+import android.content.Context
 import android.view.View
 import android.view.ViewManager
 import org.jetbrains.anko.frameLayout
 
 interface Advertiser {
-	fun init()
-
-
-	fun hasBanner(): Boolean
-
-	fun createBanner(vm: ViewManager, init: View.() -> Unit = {}): View
-
-
-	fun hasInterstitial(): Boolean
-
-	fun showInterstitial(): Boolean
-
-	fun mayShowInterstitial(): Boolean
-}
-
-open class BaseAdvertiser : Advertiser {
 	companion object {
-		private const val MIN_AD_GAP = 2 * 60 * 1000
+		private const val MIN_AD_GAP = 2 * 60 * 1000L
+		const val UNIT_DEFAULT = "default"
+		const val UNIT_BANNER = "banner"
+		const val UNIT_CONTENT = "content"
+		val DEFAULT = object : Advertiser {
+			override var lastInterstitialAdShown = System.currentTimeMillis()
+		}
+
+		protected fun mayShowInterstitial(
+			lastAdShown: Long = 0,
+			minAdGap: Long = MIN_AD_GAP,
+			hasInterstitial: () -> Boolean,
+			showInterstitial: () -> Boolean
+		): Long? {
+			val now = System.currentTimeMillis()
+			if (now - lastAdShown > minAdGap && (Math.random() * 100) < 30) {
+				if (hasInterstitial()) {
+					val res = showInterstitial()
+					if (res) {
+						return System.currentTimeMillis()
+					}
+					return null
+				}
+			}
+			return null
+		}
 	}
 
-	private var lastAdShown = System.currentTimeMillis();
+	val minAdGap: Long get() = MIN_AD_GAP
+	var lastInterstitialAdShown: Long
 
-	override fun init() =
+
+	fun init(context: Context) =
 		Unit
 
-	override fun hasBanner() =
+
+	fun hasBanner(unitName: String? = null): Boolean =
 		false
 
-	override fun createBanner(vm: ViewManager, init: View.() -> Unit): View =
-		vm.frameLayout()
-
-	override fun hasInterstitial() =
-		false
-
-	override fun showInterstitial(): Boolean =
-		false
-
-	override fun mayShowInterstitial(): Boolean {
-		val now = System.currentTimeMillis()
-		if (now - lastAdShown > MIN_AD_GAP && (Math.random() * 100) < 30) {
-			if (hasInterstitial()) {
-				val res = showInterstitial()
-				if (res) {
-					lastAdShown = System.currentTimeMillis()
-				}
-				return res
-			}
+	fun createBanner(vm: ViewManager, unitName: String? = null, init: View.() -> Unit = {}): View? =
+		with(vm) {
+			frameLayout()
 		}
-		return false
+
+	fun recycleBanner(view: View) =
+		Unit
+
+
+	fun hasInterstitial(): Boolean =
+		false
+
+	fun showInterstitial(): Boolean =
+		false
+
+	fun mayShowInterstitial(): Boolean {
+		val res = mayShowInterstitial(lastInterstitialAdShown, minAdGap, ::hasInterstitial, ::showInterstitial)
+			?: return false
+		lastInterstitialAdShown = res
+		return true
 	}
 }

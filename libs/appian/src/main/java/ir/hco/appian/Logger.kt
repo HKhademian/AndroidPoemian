@@ -50,7 +50,7 @@ interface Logger {
 			log(Log.ASSERT, tag, message, throwable)
 	}
 
-	fun init()
+	fun init(context: Context) = Unit
 
 
 	fun event(source: String, event: String, data: Bundle?)
@@ -88,7 +88,7 @@ class FirebaseLogger(private val context: Context) : Logger {
 		FirebaseAnalytics.getInstance(context)
 	}
 
-	override fun init() {
+	override fun init(context: Context) {
 		analytics.setAnalyticsCollectionEnabled(true)
 	}
 

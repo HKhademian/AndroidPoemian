@@ -1,5 +1,6 @@
 package ir.hco.appian
 
+import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.ViewManager
@@ -16,15 +17,16 @@ interface Advertiser {
 		}
 
 		protected fun mayShowInterstitial(
+			activity: Activity,
 			lastAdShown: Long = 0,
 			minAdGap: Long = MIN_AD_GAP,
-			hasInterstitial: () -> Boolean,
-			showInterstitial: () -> Boolean
+			hasInterstitial: (Activity) -> Boolean,
+			showInterstitial: (Activity) -> Boolean
 		): Long? {
 			val now = System.currentTimeMillis()
 			if (now - lastAdShown > minAdGap && (Math.random() * 100) < 30) {
-				if (hasInterstitial()) {
-					val res = showInterstitial()
+				if (hasInterstitial(activity)) {
+					val res = showInterstitial(activity)
 					if (res) {
 						return System.currentTimeMillis()
 					}
@@ -55,14 +57,14 @@ interface Advertiser {
 		Unit
 
 
-	fun hasInterstitial(): Boolean =
+	fun hasInterstitial(activity: Activity): Boolean =
 		false
 
-	fun showInterstitial(): Boolean =
+	fun showInterstitial(activity: Activity): Boolean =
 		false
 
-	fun mayShowInterstitial(): Boolean {
-		val res = mayShowInterstitial(lastInterstitialAdShown, minAdGap, ::hasInterstitial, ::showInterstitial)
+	fun mayShowInterstitial(activity: Activity): Boolean {
+		val res = mayShowInterstitial(activity, lastInterstitialAdShown, minAdGap, ::hasInterstitial, ::showInterstitial)
 			?: return false
 		lastInterstitialAdShown = res
 		return true

@@ -23,8 +23,6 @@ allprojects {
 		flatDir { dirs new File(rootProject.projectDir, 'libs') }
 
 		maven { url 'https://jitpack.io' }
-		// maven { url 'https://repository.cheshmak.me' } // Cheshmak
-		// maven { url 'http://swisscodemonkeys.github.io/appbrain-sdk/maven' } // AppBrain
 	}
 }
 
@@ -54,13 +52,12 @@ android {
 		vectorDrawables.useSupportLibrary true
 
 		buildConfigField 'String', 'APP_LINK', '"bit.ly/*"'
-
-		//buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
-		//buildConfigField 'String', 'DEVELOPER_TITLE', '"HossainCo"'
-		//buildConfigField 'String', 'DEVELOPER_EMAIL', '"hco@post.com"'
-		//buildConfigField 'String', 'DEVELOPER_PHONE', '"+98 933 481 5552"'
-		//buildConfigField 'String', 'DEVELOPER_LI', '"https://www.linkedin.com/in/hossain-khademian-45692166"'
-		//buildConfigField 'String', 'DEVELOPER_TW', '"https://twitter.com/HKhademian"'
+		buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
+		buildConfigField 'String', 'DEVELOPER_TITLE', '"HossainCo"'
+		buildConfigField 'String', 'DEVELOPER_EMAIL', '"hco@post.com"'
+		buildConfigField 'String', 'DEVELOPER_PHONE', '"+98 933 481 5552"'
+		buildConfigField 'String', 'DEVELOPER_LI', '"https://www.linkedin.com/in/hossain-khademian-45692166"'
+		buildConfigField 'String', 'DEVELOPER_TW', '"https://twitter.com/HKhademian"'
 	}
 	buildTypes {
 		debug {
@@ -78,16 +75,16 @@ android {
 		}
 	}
 
-	flavorDimensions 'market'
+	flavorDimensions 'publisher'
 	productFlavors {
 		googlePlay {
-			dimension 'market'
+			dimension 'publisher'
 			versionNameSuffix '-play'
 
 			buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
 		}
 		bazaar {
-			dimension 'market'
+			dimension 'publisher'
 			versionNameSuffix '-bazaar'
 
 			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'

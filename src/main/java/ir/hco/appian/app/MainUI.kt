@@ -23,12 +23,6 @@ internal class MainUI : AnkoComponent<MainActivity> {
 			fitsSystemWindows = true
 
 			backgroundResource = R.color.background
-			Repository.settingsLiveData.observe(ui.owner, Observer { settings ->
-				backgroundColorResource = if (settings?.darkMode == true)
-					R.color.backgroundDark
-				else
-					R.color.background
-			})
 
 			setupDrawerContent(ui)
 //			setupDrawerSide(ui)
@@ -45,40 +39,6 @@ internal class MainUI : AnkoComponent<MainActivity> {
 				setSubtitleTextColor(context.resources.getColor(R.color.primaryTextColor))
 				setTitle(R.string.app_title)
 				setSubtitle(R.string.app_subtitle)
-
-//				linearLayout {
-//					layoutParams = Toolbar.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-//
-//					imageView(R.drawable.foroog) {
-//						adjustViewBounds = true
-//						padding = dip(4)
-//					}.lparams(height = dip(64)) {
-//						gravity = START
-//					}
-//
-//				}
-
-//				verticalLayout {
-//					layoutParams = Toolbar.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-//
-//					textView {
-//						id = R.id.title
-//						textColorResource = R.color.primaryTextColor
-//						gravity = CENTER
-//						textSize = 22f
-//						typeface = Typeface.SANS_SERIF
-//						setText(R.string.app_title)
-//					}.lparams(width = MATCH_PARENT, height = WRAP_CONTENT)
-//					textView {
-//						id = R.id.subtitle
-//						textColorResource = R.color.primaryTextColor
-//						gravity = CENTER
-//						textSize = 14f
-//						typeface = Typeface.SANS_SERIF
-//						setText(R.string.app_subtitle)
-//					}.lparams(width = MATCH_PARENT, height = WRAP_CONTENT)
-//				}
-
 			}
 
 			frameLayout {
@@ -96,15 +56,4 @@ internal class MainUI : AnkoComponent<MainActivity> {
 			}.lparams(width = MATCH_PARENT, height = WRAP_CONTENT)
 		}
 	}
-
-//	private fun DrawerLayout.setupDrawerSide(ui: AnkoContext<MainActivity>) {
-//		frameLayout {
-//			id = R.id.side
-//
-//			backgroundColor = Color.WHITE
-//			textView("NULL")
-//		}.drawerLParams(width = dip(196), height = MATCH_PARENT) {
-//			gravity = GravityCompat.START
-//		}
-//	}
 }

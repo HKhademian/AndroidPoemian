@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.transaction
 import ir.hco.appian.app.page.home.HomePage
 import ir.hossainco.utils.packages.forceLayoutDir
 import org.jetbrains.anko.AnkoContext
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 

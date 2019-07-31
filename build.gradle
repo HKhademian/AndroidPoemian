@@ -50,8 +50,8 @@ android {
 		targetSdkVersion Versions.App.targetSdk
 
 		applicationId 'ir.hco.appian.poem.foroog'
-		versionCode 101
-		versionName '01.01'
+		versionCode 103
+		versionName '01.03'
 
 		resConfigs 'en'
 		vectorDrawables.useSupportLibrary true
@@ -94,8 +94,6 @@ android {
 			versionNameSuffix '-bazaar'
 
 			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'
-//			buildConfigField 'String', 'ADAD_APP_TOKEN', '"a1b66a0e-1db8-4d3a-9c00-5b834954a6bc"'
-//			buildConfigField 'String', 'ADAD_AD_TOKEN', '"b7d2984d-7c9c-4dbf-bf96-b750d320f69b"'
 			buildConfigField 'String', 'MAGNET_BANNER_AD_TOKEN', '"6f8a2e3bfbdf08d6a1412778607d7723"'
 			buildConfigField 'String', 'MAGNET_INTERSTITIAL_AD_TOKEN', '"40439f23fbe108d6b6ec699fee5173af"'
 		}
@@ -134,5 +132,4 @@ dependencies {
 
 	googlePlayImplementation Deps.appbrain
 	bazaarImplementation files('libs/magnet-android-sdk-5.0.7.jar')
-
 }

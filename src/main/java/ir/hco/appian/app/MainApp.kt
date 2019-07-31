@@ -10,6 +10,7 @@ import ir.hossainco.utils.App
 import ir.hossainco.utils.packages.setLocale
 import ir.hossainco.utils.tryOrDefault
 import ir.hossainco.utils.ui.setDefaultTypefaces
+import org.jetbrains.anko.frameLayout
 import org.jetbrains.anko.view
 import java.util.*
 
@@ -48,7 +49,7 @@ abstract class MainApp : Application() {
 		Unit
 
 	open fun createBanner(vm: ViewManager, init: View.() -> Unit = {}): View =
-		vm.view()
+		vm.frameLayout()
 
 	open fun hasInterstitial() =
 		false

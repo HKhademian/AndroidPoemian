@@ -12,12 +12,12 @@ import androidx.lifecycle.Observer
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Repository
-import ir.hco.appian.utils.linearLParams
-import ir.hco.appian.utils.views.item
-import ir.hco.appian.utils.views.myCardView
-import ir.hco.appian.utils.views.myTextView
+import ir.hco.appian.views.cardView
+import ir.hco.appian.views.item
+import ir.hco.appian.views.linearLParams
 import ir.hossainco.utils.App.context
 import ir.hossainco.utils.ui.TextSize
+import ir.hossainco.utils.view.appTextView
 import ir.hossainco.utils.view.spliter
 import ir.hossainco.utils.view.verticalScrollView
 import org.jetbrains.anko.*
@@ -30,7 +30,7 @@ internal class HomeUI : AnkoComponent<HomePage> {
 			id = R.id.list
 			padding = dip(8)
 
-			myCardView(owner) {
+			cardView {
 				verticalLayout {
 					radius = 16f
 					gravity = CENTER
@@ -40,11 +40,11 @@ internal class HomeUI : AnkoComponent<HomePage> {
 						scaleType = ImageView.ScaleType.CENTER_CROP
 					}.lparams(width = MATCH_PARENT, height = dip(256))
 
-					myTextView(owner, textRes = R.string.app_title, textSize = TextSize.ExtraLargeTextSize) {
+					appTextView(textRes = R.string.app_title, textSize = TextSize.ExtraLargeTextSize) {
 						gravity = CENTER
 					}.lparams(width = MATCH_PARENT)
 
-					myTextView(owner, textRes = R.string.app_subtitle, textSize = TextSize.LargeTextSize) {
+					appTextView(textRes = R.string.app_subtitle, textSize = TextSize.LargeTextSize) {
 						gravity = CENTER
 					}.lparams(width = MATCH_PARENT)
 				}

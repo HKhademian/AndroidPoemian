@@ -1,4 +1,4 @@
-package ir.hco.appian.utils.views
+package ir.hco.appian.views
 
 import android.view.Gravity.CENTER_VERTICAL
 import android.view.Gravity.START
@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.cardview.widget.CardView
 import ir.hco.appian.page.BasePage
 import ir.hossainco.utils.ui.TextSize
+import ir.hossainco.utils.view.appTextView
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.imageView
 import org.jetbrains.anko.linearLayout
@@ -23,7 +24,7 @@ fun ViewManager.item(
 	@DrawableRes iconRes: Int? = null,
 
 	init: (CardView.() -> Unit) = {}
-) = myCardView(owner) {
+) = cardView {
 	linearLayout {
 		padding = dip(8)
 
@@ -31,7 +32,7 @@ fun ViewManager.item(
 			imageView(iconRes)
 				.lparams(width = dip(64), height = dip(64))
 
-		myTextView(owner, text = title, textRes = titleRes, textSize = TextSize.LargeTextSize) {
+		appTextView(text = title, textRes = titleRes, textSize = TextSize.LargeTextSize) {
 			gravity = START or CENTER_VERTICAL
 		}.lparams(
 			width = MATCH_PARENT,

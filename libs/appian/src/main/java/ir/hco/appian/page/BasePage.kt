@@ -1,6 +1,6 @@
 package ir.hco.appian.page
 
-import androidx.appcompat.app.AppCompatActivity
+// import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 abstract class BasePage : Fragment() {
@@ -13,7 +13,7 @@ abstract class BasePage : Fragment() {
 	}
 
 	internal fun updateTitle(title: String?) {
-		(activity as? AppCompatActivity)?.supportActionBar?.subtitle = title
+		// 	(activity as? AppCompatActivity)?.supportActionBar?.subtitle = title
 	}
 
 }

@@ -76,7 +76,8 @@ class ArticleDetailPage() : BasePage() {
 
 	override fun onStart() {
 		super.onStart()
-		(context?.applicationContext as? MainApp)?.mayShowInterstitial()
+		val activity = activity?:return
+		(activity.applicationContext as? MainApp)?.advertiser?.mayShowInterstitial(activity)
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

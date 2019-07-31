@@ -22,20 +22,19 @@ android {
 }
 
 dependencies {
-	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-	implementation Deps.anko_sdk27
+	api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+	api Deps.anko_sdk27
 
-	implementation Deps.core_ktx
-	implementation Deps.fragment
-	implementation Deps.fragment_ktx
-	implementation Deps.recyclerview
-	implementation Deps.appcompat
-	implementation Deps.cardview
+	api Deps.core_ktx
+	api Deps.fragment
+	api Deps.fragment_ktx
+	api Deps.cardview
 
-	implementation Deps.lifecycle_extensions
-	implementation Deps.lifecycle_viewmodel_ktx
-	kapt Deps.lifecycle_compiler
+	api project(':lib-util')
 
-	implementation project(':lib-util')
+	api 'com.google.firebase:firebase-core:17.0.1'
+	api 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
+	api 'com.google.firebase:firebase-messaging:19.0.1'
+	api 'co.ronash.android:pushe-base:1.6.3'
 }

@@ -4,14 +4,14 @@ buildscript {
 	repositories {
 		google()
 		jcenter()
-		// maven { url 'https://maven.fabric.io/public' }
+		maven { url 'https://maven.fabric.io/public' }
 	}
 
 	dependencies {
 		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-		classpath 'com.android.tools.build:gradle:3.4.1'
-		// classpath 'com.google.gms:google-services:4.2.0'
-		// classpath 'io.fabric.tools:gradle:1.26.1'
+		classpath 'com.android.tools.build:gradle:3.4.2'
+		classpath 'com.google.gms:google-services:4.3.0'
+		classpath 'io.fabric.tools:gradle:1.26.1'
 	}
 }
 
@@ -19,23 +19,18 @@ allprojects {
 	repositories {
 		google()
 		jcenter()
-		// mavenCentral()
 
-		// flatDir { dirs 'libs' }
 		flatDir { dirs new File(rootProject.projectDir, 'libs') }
 
-		// maven { url 'https://jitpack.io' }
-		// maven { url 'https://repository.cheshmak.me' } // Cheshmak
-		maven { url 'http://swisscodemonkeys.github.io/appbrain-sdk/maven' } // AppBrain
+		maven { url 'https://jitpack.io' }
 	}
 }
-
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'io.fabric'
+apply plugin: 'io.fabric'
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 	kotlinOptions {
@@ -76,8 +71,8 @@ android {
 			signingConfig signingConfigs.debug
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
 				'proguard-rules.pro',
-				'proguard-flatten.pro',
-				'proguard-dictionary.pro'
+				'libs/util/proguard-flatten.pro',
+				'libs/util/proguard-dictionary.pro'
 		}
 	}
 
@@ -104,6 +99,8 @@ android {
 		exclude '/kotlin/**'
 		exclude '/fabric/**'
 		exclude '/*.properties'
+
+		exclude '/PufferDB.proto'
 	}
 }
 
@@ -117,19 +114,16 @@ dependencies {
 	implementation Deps.core_ktx
 	implementation Deps.fragment
 	implementation Deps.fragment_ktx
-	implementation Deps.recyclerview
+	// implementation Deps.recyclerview
 	implementation Deps.appcompat
-	implementation Deps.cardview
+	// implementation Deps.cardview
 
 	implementation Deps.lifecycle_extensions
 	implementation Deps.lifecycle_viewmodel_ktx
 	kapt Deps.lifecycle_compiler
 
-	// implementation Deps.pushe
-
 	implementation project(':lib-util')
 	implementation project(':lib-appian')
-
-	googlePlayImplementation Deps.appbrain
-	bazaarImplementation files('libs/magnet-android-sdk-5.0.7.jar')
 }
+
+apply plugin: 'com.google.gms.google-services'

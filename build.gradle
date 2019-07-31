@@ -52,13 +52,12 @@ android {
 		vectorDrawables.useSupportLibrary true
 
 		buildConfigField 'String', 'APP_LINK', '"bit.ly/poemForoog"'
-
-		//buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
-		//buildConfigField 'String', 'DEVELOPER_TITLE', '"HossainCo"'
-		//buildConfigField 'String', 'DEVELOPER_EMAIL', '"hco@post.com"'
-		//buildConfigField 'String', 'DEVELOPER_PHONE', '"+98 933 481 5552"'
-		//buildConfigField 'String', 'DEVELOPER_LI', '"https://www.linkedin.com/in/hossain-khademian-45692166"'
-		//buildConfigField 'String', 'DEVELOPER_TW', '"https://twitter.com/HKhademian"'
+		buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
+		buildConfigField 'String', 'DEVELOPER_TITLE', '"HossainCo"'
+		buildConfigField 'String', 'DEVELOPER_EMAIL', '"hco@post.com"'
+		buildConfigField 'String', 'DEVELOPER_PHONE', '"+98 933 481 5552"'
+		buildConfigField 'String', 'DEVELOPER_LI', '"https://www.linkedin.com/in/hossain-khademian-45692166"'
+		buildConfigField 'String', 'DEVELOPER_TW', '"https://twitter.com/HKhademian"'
 	}
 	buildTypes {
 		debug {
@@ -76,16 +75,16 @@ android {
 		}
 	}
 
-	flavorDimensions 'market'
+	flavorDimensions 'publisher'
 	productFlavors {
 		googlePlay {
-			dimension 'market'
+			dimension 'publisher'
 			versionNameSuffix '-play'
 
 			buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
 		}
 		bazaar {
-			dimension 'market'
+			dimension 'publisher'
 			versionNameSuffix '-bazaar'
 
 			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'

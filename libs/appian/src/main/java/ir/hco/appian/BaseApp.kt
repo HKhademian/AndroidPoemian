@@ -4,6 +4,10 @@ package ir.hco.appian
 
 import android.app.Application
 import android.graphics.Typeface
+import ir.hco.utils.Advertiser
+import ir.hco.utils.GooglePlayPublisher
+import ir.hco.utils.Logger
+import ir.hco.utils.Publisher
 import ir.hossainco.utils.App
 import ir.hossainco.utils.packages.setLocale
 import ir.hossainco.utils.tryOrDefault
@@ -16,9 +20,9 @@ abstract class BaseApp : Application() {
 	}
 
 	@Suppress("LeakingThis")
-	open val logger: Logger = FirebaseLogger(this)
+	open val logger: Logger = FirebaseLogger
 	open val advertiser: Advertiser = Advertiser.DEFAULT
-	abstract val publisher: Publisher
+	open val publisher: Publisher = GooglePlayPublisher
 
 	override fun onCreate() {
 		super.onCreate()

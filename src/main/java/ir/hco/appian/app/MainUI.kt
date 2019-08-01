@@ -1,6 +1,5 @@
 package ir.hco.appian.app
 
-import android.graphics.Color
 import android.view.Gravity.CENTER
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -14,8 +13,16 @@ internal class MainUI : AnkoComponent<MainActivity> {
 			backgroundColorResource = R.color.background
 
 			frameLayout {
+				id = R.id.header
+			}.lparams(width = MATCH_PARENT, height = WRAP_CONTENT)
+
+			frameLayout {
 				id = R.id.fragment
 			}.lparams(width = MATCH_PARENT, height = 0, weight = 1f)
+
+			frameLayout {
+				id = R.id.footer
+			}.lparams(width = MATCH_PARENT, height = WRAP_CONTENT)
 
 			frameLayout {
 				backgroundColorResource = R.color.primaryDarkColor
@@ -24,7 +31,7 @@ internal class MainUI : AnkoComponent<MainActivity> {
 					.lparams(gravity = CENTER)
 
 				(App.app as MainApp).advertiser.createBanner(this)
-					.lparams(width = MATCH_PARENT, height = WRAP_CONTENT, gravity = CENTER)
+					?.lparams(width = MATCH_PARENT, height = WRAP_CONTENT, gravity = CENTER)
 			}.lparams(width = MATCH_PARENT, height = dip(50))
 		}
 	}

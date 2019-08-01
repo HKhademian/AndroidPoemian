@@ -1,10 +1,9 @@
 package ir.hco.appian.app
 
-import ir.hco.appian.GooglePlayPublisher
+import ir.hco.utils.GooglePlayPublisher
 
 class MarketApp : MainApp() {
 	override val publisher = GooglePlayPublisher(
-		developerId = BuildConfig.DEVELOPER_ID,
-		forceMarket = false
+		developerId = BuildConfig.DEVELOPER_ID
 	)
 }

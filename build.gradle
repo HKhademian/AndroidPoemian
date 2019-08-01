@@ -77,18 +77,28 @@ android {
 
 	flavorDimensions 'publisher'
 	productFlavors {
+
 		googlePlay {
 			dimension 'publisher'
 			versionNameSuffix '-play'
 
 			buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
 		}
+
 		bazaar {
 			dimension 'publisher'
 			versionNameSuffix '-bazaar'
 
 			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'
 		}
+
+		myket {
+			dimension 'publisher'
+			versionNameSuffix '-myket'
+
+			buildConfigField 'String', 'DEVELOPER_ID', '"dev-19620"'
+		}
+
 	}
 
 	packagingOptions {

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
-import ir.hco.appian.page.BasePage
+import ir.hco.util.page.BasePage
 import org.jetbrains.anko.AnkoContext
 
 class HomePage : BasePage() {

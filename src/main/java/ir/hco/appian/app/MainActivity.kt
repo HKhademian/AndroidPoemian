@@ -21,12 +21,12 @@ class MainActivity : FragmentActivity() {
 			}
 		}
 
-		if (handleIntent(intent)) {
-			// we are directly displaying the story
-		}
+		//if (handleIntent(intent)) {
+		//	 we are directly displaying the story
+		//}
 	}
 
-	private fun handleIntent(intent: Intent?): Boolean {
-		return false
-	}
+	// private fun handleIntent(intent: Intent?): Boolean {
+	// 	return false
+	// }
 }

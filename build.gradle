@@ -81,22 +81,26 @@ android {
 		googlePlay {
 			dimension 'publisher'
 			versionNameSuffix '-play'
-
 			buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
 		}
 
 		bazaar {
 			dimension 'publisher'
 			versionNameSuffix '-bazaar'
-
 			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'
+			buildConfigField 'String', 'ADAD_APP_TOKEN', '""'
+			buildConfigField 'String', 'ADAD_BANNER_TOKEN', '""'
+			buildConfigField 'String', 'ADAD_CONTENT_TOKEN', '""'
+			buildConfigField 'String', 'ADAD_FULL_TOKEN', '""'
 		}
 
 		myket {
 			dimension 'publisher'
 			versionNameSuffix '-myket'
-
 			buildConfigField 'String', 'DEVELOPER_ID', '"dev-19620"'
+			buildConfigField 'String', 'MAGNET_BANNER_TOKEN', '""'
+			buildConfigField 'String', 'MAGNET_CONTENT_TOKEN', '""'
+			buildConfigField 'String', 'MAGNET_FULL_TOKEN', '""'
 		}
 
 	}
@@ -126,9 +130,10 @@ dependencies {
 	implementation Deps.lifecycle_viewmodel_ktx
 	kapt Deps.lifecycle_compiler
 
-	// implementation Deps.pufferdb
-
 	implementation project(':lib-util')
+	// googlePlayImplementation project(':lib-appbrain')
+	// bazaarImplementation project(':lib-adad')
+	// myketImplementation project(':lib-magnet')
 }
 
 apply plugin: 'com.google.gms.google-services'

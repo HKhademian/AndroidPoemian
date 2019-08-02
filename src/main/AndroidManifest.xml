@@ -16,6 +16,7 @@
 		android:isGame="false"
 		android:name=".MainApp"
 		tools:ignore="AllowBackup,GoogleAppIndexingWarning"
+		tools:replace="android:theme"
 		tools:targetApi="n">
 
 		<activity android:name=".MainActivity">

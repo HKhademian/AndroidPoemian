@@ -12,7 +12,8 @@ class MarketApp : MainApp() {
 		testMode = BuildConfig.DEBUG,
 		appToken = BuildConfig.ADAD_APP_TOKEN,
 		bannerToken = BuildConfig.ADAD_BANNER_TOKEN,
-		fullToken = BuildConfig.ADAD_FULL_TOKEN
+		fullToken = BuildConfig.ADAD_FULL_TOKEN,
+		notificationToken = BuildConfig.ADAD_NOTIFICATION_TOKEN
 	)
 
 }

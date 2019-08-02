@@ -1,3 +1,5 @@
+import com.android.build.gradle.api.ApplicationVariant
+
 buildscript {
 	apply from: './deps.gradle'
 
@@ -48,10 +50,10 @@ android {
 		versionCode 101
 		versionName '01.01'
 
-		resConfigs 'en'
+		resConfigs 'fa'
 		vectorDrawables.useSupportLibrary true
 
-		buildConfigField 'String', 'APP_LINK', '"bit.ly/*"'
+		buildConfigField 'String', 'APP_LINK', '"bit.ly/hossainco"'
 		buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
 		buildConfigField 'String', 'DEVELOPER_TITLE', '"HossainCo"'
 		buildConfigField 'String', 'DEVELOPER_EMAIL', '"hco@post.com"'
@@ -75,34 +77,68 @@ android {
 		}
 	}
 
-	flavorDimensions 'publisher'
-	productFlavors {
+	flavorDimensions 'product', 'publisher'
 
+	productFlavors {
+		product1 {
+			dimension 'product'
+			applicationId 'ir.hco.appian.product1'
+			versionCode 101
+			versionName '01.01'
+			buildConfigField 'String', 'APP_LINK', '"bit.ly/product1"'
+
+			ext {
+				googlePlay = {
+					buildConfigField 'String', 'APP_LINK', '"bit.ly/product1GooglePlay"'
+				}
+				bazaar = {
+					buildConfigField 'String', 'APP_LINK', '"bit.ly/product1Bazaar"'
+					buildConfigField 'String', 'ADAD_APP_TOKEN', '""'
+					buildConfigField 'String', 'ADAD_BANNER_TOKEN', '""'
+					buildConfigField 'String', 'ADAD_CONTENT_TOKEN', '""'
+					buildConfigField 'String', 'ADAD_FULL_TOKEN', '""'
+					buildConfigField 'String', 'ADAD_NOTIFICATION_TOKEN', '""'
+					buildConfigField 'String', 'MAGNET_BANNER_TOKEN', '""'
+					buildConfigField 'String', 'MAGNET_CONTENT_TOKEN', '""'
+					buildConfigField 'String', 'MAGNET_FULL_TOKEN', '""'
+				}
+				myket = {
+					buildConfigField 'String', 'APP_LINK', '"bit.ly/product1Myket"'
+					buildConfigField 'String', 'MAGNET_BANNER_TOKEN', '""'
+					buildConfigField 'String', 'MAGNET_CONTENT_TOKEN', '""'
+					buildConfigField 'String', 'MAGNET_FULL_TOKEN', '""'
+				}
+			}
+		}
+	}
+
+	productFlavors {
 		googlePlay {
 			dimension 'publisher'
 			versionNameSuffix '-play'
 			buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
 		}
-
 		bazaar {
 			dimension 'publisher'
 			versionNameSuffix '-bazaar'
 			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'
-			buildConfigField 'String', 'ADAD_APP_TOKEN', '""'
-			buildConfigField 'String', 'ADAD_BANNER_TOKEN', '""'
-			buildConfigField 'String', 'ADAD_CONTENT_TOKEN', '""'
-			buildConfigField 'String', 'ADAD_FULL_TOKEN', '""'
 		}
-
 		myket {
 			dimension 'publisher'
 			versionNameSuffix '-myket'
 			buildConfigField 'String', 'DEVELOPER_ID', '"dev-19620"'
-			buildConfigField 'String', 'MAGNET_BANNER_TOKEN', '""'
-			buildConfigField 'String', 'MAGNET_CONTENT_TOKEN', '""'
-			buildConfigField 'String', 'MAGNET_FULL_TOKEN', '""'
 		}
+	}
 
+	applicationVariants.all { ApplicationVariant variant ->
+		def flavors = variant.productFlavors
+		def product = flavors[0]
+		def publisher = flavors[1]
+		if (product.hasProperty(publisher.name)) {
+			Closure closure = product[publisher.name]
+			closure.delegate = variant
+			closure()
+		}
 	}
 
 	packagingOptions {
@@ -125,6 +161,8 @@ dependencies {
 	implementation Deps.core_ktx
 	implementation Deps.fragment
 	implementation Deps.fragment_ktx
+	// implementation Deps.recyclerview
+	// implementation Deps.cardview
 
 	implementation Deps.lifecycle_extensions
 	implementation Deps.lifecycle_viewmodel_ktx

@@ -1,5 +1,6 @@
 package ir.hco.appian.app
 
+import com.appbrain.AppBrainAdvertiser
 import ir.hco.appian.GooglePlayPublisher
 
 class MarketApp : MainApp() {
@@ -7,4 +8,5 @@ class MarketApp : MainApp() {
 		developerId = BuildConfig.DEVELOPER_ID,
 		forceMarket = false
 	)
+	override val advertiser = AppBrainAdvertiser()
 }

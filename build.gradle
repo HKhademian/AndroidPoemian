@@ -45,8 +45,8 @@ android {
 		targetSdkVersion Versions.App.targetSdk
 
 		applicationId 'ir.hco.appian.poem.foroog'
-		versionCode 103
-		versionName '01.03'
+		versionCode 105
+		versionName '01.05'
 
 		resConfigs 'en'
 		vectorDrawables.useSupportLibrary true
@@ -87,9 +87,12 @@ android {
 			dimension 'publisher'
 			versionNameSuffix '-bazaar'
 
+			buildConfigField 'String', 'APP_LINK', '"bit.ly/2ZlLQN3"'
 			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'
-			buildConfigField 'String', 'MAGNET_BANNER_AD_TOKEN', '"6f8a2e3bfbdf08d6a1412778607d7723"'
-			buildConfigField 'String', 'MAGNET_INTERSTITIAL_AD_TOKEN', '"40439f23fbe108d6b6ec699fee5173af"'
+			buildConfigField 'String', 'ADAD_APP_TOKEN', '"a1b66a0e-1db8-4d3a-9c00-5b834954a6bc"'
+			buildConfigField 'String', 'ADAD_BANNER_TOKEN', '"b7d2984d-7c9c-4dbf-bf96-b750d320f69b"'
+			buildConfigField 'String', 'ADAD_CONTENT_TOKEN', '"a5ef2321-34d2-4fc1-8ba4-2499f6364d07"'
+			buildConfigField 'String', 'ADAD_INTERSTITIAL_TOKEN', '"45cde708-534e-4142-b0be-ad8b16a68308"'
 		}
 	}
 
@@ -113,9 +116,9 @@ dependencies {
 	implementation Deps.core_ktx
 	implementation Deps.fragment
 	implementation Deps.fragment_ktx
-	// implementation Deps.recyclerview
+	implementation Deps.recyclerview
 	implementation Deps.appcompat
-	// implementation Deps.cardview
+	implementation Deps.cardview
 
 	implementation Deps.lifecycle_extensions
 	implementation Deps.lifecycle_viewmodel_ktx
@@ -123,6 +126,9 @@ dependencies {
 
 	implementation project(':lib-util')
 	implementation project(':lib-appian')
+
+	bazaarImplementation project(':lib-adad')
+	googlePlayImplementation project(':lib-appbrain')
 }
 
 apply plugin: 'com.google.gms.google-services'

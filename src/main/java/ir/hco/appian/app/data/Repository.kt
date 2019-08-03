@@ -45,7 +45,7 @@ object Repository {
 			.map { catsData.getJSONObject(it) }
 			.map(::Category)
 			.onEach {
-				Log.e("data.cat", it.toString())
+				//Log.e("data.cat", it.toString())
 			})
 
 		var i = 0
@@ -62,7 +62,7 @@ object Repository {
 			}
 			.onEach {
 				poems.add(it)
-				Log.e("data.poem", it.toString())
+				// Log.e("data.poem", it.toString())
 			}
 			.count()
 	}

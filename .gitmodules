@@ -1,4 +1,20 @@
 
 [submodule "libs/util"]
 	path = libs/util
-	url = git@github.com:HKhademian/LibUtil.git
+	url = D:\\Repository\\Android\\LibUtil.git
+
+[submodule "libs/adad"]
+	path = libs/adad
+	url = D:\\Repository\\Android\\LibAdad.git
+
+[submodule "libs/appbrain"]
+	path = libs/appbrain
+	url = D:\\Repository\\Android\\LibAppBrain.git
+
+[submodule "libs/magnet"]
+	path = libs/magnet
+	url = D:\\Repository\\Android\\LibMagnet.git
+
+[submodule "libs/fcm"]
+	path = libs/fcm
+	url = D:\\Repository\\Android\\LibFCM.git

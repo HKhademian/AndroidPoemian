@@ -40,6 +40,7 @@ internal class ArticleDetailUI : AnkoComponent<ArticleDetailPage> {
 
 			appTextView(
 				id = R.id.text,
+				notebookLine = true,
 				notebookLineColor = Color.DKGRAY,
 				textSize = TextSize.LargeTextSize
 			) {

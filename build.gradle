@@ -51,7 +51,7 @@ android {
 		resConfigs 'fa'
 		vectorDrawables.useSupportLibrary true
 
-		buildConfigField 'String', 'APP_LINK', '"bit.ly/poemForoog"'
+		buildConfigField 'String', 'APP_LINK', '"bit.ly/hossainco"'
 		buildConfigField 'String', 'DEVELOPER_ID', '"HossainCo"'
 		buildConfigField 'String', 'DEVELOPER_TITLE', '"HossainCo"'
 		buildConfigField 'String', 'DEVELOPER_EMAIL', '"hco@post.com"'
@@ -115,7 +115,6 @@ android {
 		bazaar {
 			dimension 'publisher'
 			versionNameSuffix '-bazaar'
-
 			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'
 		}
 		myket {

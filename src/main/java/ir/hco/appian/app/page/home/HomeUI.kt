@@ -12,10 +12,10 @@ import androidx.lifecycle.Observer
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Repository
-import ir.hco.appian.views.cardView
-import ir.hco.appian.views.item
-import ir.hco.appian.views.linearLParams
-import ir.hossainco.utils.App.context
+import ir.hco.appian.app.views.cardView
+import ir.hco.appian.app.views.item
+import ir.hco.util.BaseApp.Companion.context
+import ir.hco.util.views.linearLParams
 import ir.hossainco.utils.ui.TextSize
 import ir.hossainco.utils.view.appTextView
 import ir.hossainco.utils.view.spliter
@@ -52,7 +52,7 @@ internal class HomeUI : AnkoComponent<HomePage> {
 				margin = context.dip(4)
 			}
 
-			item(ui.owner, titleRes = R.string.item_bookmarks, iconRes = R.drawable.ic_bookmark) {
+			item(titleRes = R.string.item_bookmarks, iconRes = R.drawable.ic_bookmark) {
 				Repository.bookmarksLiveData.observe(ui.owner, Observer {
 					isVisible = !it.isNullOrEmpty()
 				})
@@ -70,14 +70,14 @@ internal class HomeUI : AnkoComponent<HomePage> {
 
 			spliter()
 
-//			item(ui.owner, titleRes = R.string.item_settings, iconRes = R.mipmap.ic_launcher_round)
+//			item(titleRes = R.string.item_settings, iconRes = R.mipmap.ic_launcher_round)
 //				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 //					margin = context.dip(4)
 //				}.setOnClickListener {
 //					ui.owner.onClickSettings(it)
 //				}
 
-			item(ui.owner, titleRes = R.string.item_references, iconRes = R.drawable.ic_references)
+			item(titleRes = R.string.item_references, iconRes = R.drawable.ic_references)
 				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 					margin = context.dip(4)
 				}.setOnClickListener {
@@ -91,14 +91,14 @@ internal class HomeUI : AnkoComponent<HomePage> {
 //					ui.owner.onClickAbout(it)
 //				}
 
-			item(ui.owner, titleRes = R.string.item_apps, iconRes = R.drawable.ic_other_apps)
+			item(titleRes = R.string.item_apps, iconRes = R.drawable.ic_other_apps)
 				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 					margin = context.dip(4)
 				}.setOnClickListener {
 					ui.owner.onClickOtherApps(it)
 				}
 
-			item(ui.owner, titleRes = R.string.item_rate, iconRes = R.drawable.ic_vote)
+			item(titleRes = R.string.item_rate, iconRes = R.drawable.ic_vote)
 				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 					margin = context.dip(4)
 				}.setOnClickListener {
@@ -108,10 +108,9 @@ internal class HomeUI : AnkoComponent<HomePage> {
 	}
 
 	fun ViewManager.category(ui: AnkoContext<HomePage>, category: Category, level: Int): CardView {
-		val context = context
 		val subCategories = Repository.cats.filter { it.parentId == category.id }
 
-		val view = item(ui.owner, title = category.title, iconRes = R.mipmap.ic_launcher)
+		val view = item(title = category.title, iconRes = R.mipmap.ic_launcher)
 			.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
 				margin = context.dip(4)
 			}

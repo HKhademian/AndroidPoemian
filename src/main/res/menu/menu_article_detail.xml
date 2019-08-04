@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item
 		android:id="@+id/item_bookmark"
 		android:title="@string/item_bookmark"
 		android:icon="@drawable/ic_bookmark_off"
-		app:showAsAction="always"/>
+		android:showAsAction="always"/>
 	<item
 		android:id="@+id/item_share"
 		android:title="@string/item_share"
 		android:icon="@drawable/ic_share"
-		app:showAsAction="ifRoom"/>
+		android:showAsAction="ifRoom"/>
 	<item
 		android:id="@+id/item_copy"
 		android:title="@string/item_copy"
 		android:icon="@drawable/ic_copy"
-		app:showAsAction="ifRoom"/>
+		android:showAsAction="ifRoom"/>
 </menu>

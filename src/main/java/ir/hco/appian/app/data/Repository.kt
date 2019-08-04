@@ -1,15 +1,14 @@
 package ir.hco.appian.app.data
 
-import android.util.Log
-import androidx.fragment.app.Fragment
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import ir.hossainco.utils.App
+import ir.hco.util.BaseApp
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.jetbrains.anko.defaultSharedPreferences
 import org.json.JSONArray
 import org.json.JSONObject
-import kotlin.math.max
-import kotlin.math.min
 
 object Repository {
 	private const val PREF_BOOKMARKS = "bookmarks"
@@ -28,11 +27,16 @@ object Repository {
 	val cats = mutableListOf<Category>()
 	val poems = mutableListOf<Poem>()
 
-	fun init() {
-		readBookmarks()
-		// readSettings()
+	private val context get() = BaseApp.context
 
-		val indexData = App.app.assets.open("data/index.new.json").use {
+	fun init(context: Context) = runBlocking {
+		readBookmarks(context)
+		// readSettings(context)
+
+	}
+
+	suspend fun load(context: Context) = withContext(Dispatchers.IO) {
+		val indexData = context.assets.open("data/index.new.json").use {
 			it.bufferedReader().readText()
 		}
 		val index = JSONObject(indexData)
@@ -67,74 +71,8 @@ object Repository {
 			.count()
 	}
 
-	fun observeSettings(owner: Fragment, observer: (Settings) -> Unit) {
-		Repository.settingsLiveData.observe(owner, Observer {
-			observer(it ?: DEFAULT_SETTINGS)
-		})
-	}
-
-	fun fontSizeMultiplierUp(): Boolean {
-		val current = settings
-		val currentVal = current.fontSizeMultiplier
-		val newVal = min(FONT_SIZE_MUL_MAX, currentVal + 0.1f)
-
-		if (currentVal == newVal)
-			return false
-
-		settingsLiveData.postValue(
-			current.copy(
-				fontSizeMultiplier = newVal
-			)
-		)
-		return true
-	}
-
-	fun fontSizeMultiplierDown(): Boolean {
-		val current = settings
-		val currentVal = current.fontSizeMultiplier
-		val newVal = max(FONT_SIZE_MUL_MIN, currentVal - 0.1f)
-
-		if (currentVal == newVal)
-			return false
-
-		settingsLiveData.postValue(
-			current.copy(
-				fontSizeMultiplier = newVal
-			)
-		)
-		return true
-	}
-
-
-	fun darkMode(mode: Boolean = true): Boolean {
-		val current = settings
-		val currentVal = current.darkMode
-
-		if (currentVal == mode)
-			return false
-
-		settingsLiveData.postValue(
-			current.copy(
-				darkMode = mode
-			)
-		)
-		return true
-	}
-
-	fun toggleDarkMode(): Boolean {
-		val current = settings
-		val currentVal = current.darkMode
-
-		settingsLiveData.postValue(
-			current.copy(
-				darkMode = !currentVal
-			)
-		)
-		return true
-	}
-
-	private fun readBookmarks() {
-		val pref = App.app.defaultSharedPreferences
+	private fun readBookmarks(context: Context) {
+		val pref = context.defaultSharedPreferences
 		val bookmarks = (pref.getString(PREF_BOOKMARKS, null) ?: "")
 			.split("\n")
 			.filter { it.isNotBlank() }
@@ -145,7 +83,7 @@ object Repository {
 	private fun setBookmarks(bookmarks: Set<String>) {
 		bookmarksLiveData.postValue(bookmarks)
 
-		val pref = App.app.defaultSharedPreferences
+		val pref = context.defaultSharedPreferences
 		pref.edit().putString(PREF_BOOKMARKS, bookmarks.joinToString("\n")).apply()
 	}
 

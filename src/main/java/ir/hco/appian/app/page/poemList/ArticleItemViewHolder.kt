@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Repository
 
@@ -20,10 +19,10 @@ internal class ArticleItemViewHolder(
 	private val bookmarkView = itemView.findViewById<ImageView>(R.id.bookmark)
 
 	private val bookmarkOnDrawable = DrawableCompat.wrap(
-		VectorDrawableCompat.create(itemView.context.resources, R.drawable.ic_bookmark_on, null)!!
+		itemView.context.resources.getDrawable(R.drawable.ic_bookmark_on)
 	).mutate()
 	private val bookmarkOffDrawable = DrawableCompat.wrap(
-		VectorDrawableCompat.create(itemView.context.resources, R.drawable.ic_bookmark_off, null)!!
+		itemView.context.resources.getDrawable(R.drawable.ic_bookmark_off)
 	).mutate()
 
 	init {

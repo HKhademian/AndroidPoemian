@@ -1,7 +1,7 @@
 package ir.hco.appian.app.data
 
 import ir.hco.appian.app.R
-import ir.hossainco.utils.App
+import ir.hco.util.BaseApp
 import java.io.Serializable
 
 interface Article : Serializable {
@@ -10,16 +10,16 @@ interface Article : Serializable {
 
 	companion object {
 		fun readAssets(path: String) =
-			App.assets.open(path).use {
+			BaseApp.assets.open(path).use {
 				it.bufferedReader().readText()
 			}
 	}
 
 	object ReferencesArticle : Article {
 		override val title =
-			App.res.getString(R.string.item_references) ?: ""
+			BaseApp.res.getString(R.string.item_references) ?: ""
 
 		override val content
-			get() = readAssets("data/references.txt")
+			get() = readAssets("(انتشار محتوا با ذکر منبع آن آزاد است)\n\nکوکا\nگود ریدز\nپارسی نو\n(dashmili-5) بلاگفا\nستاره\nآرگامگ\n")
 	}
 }

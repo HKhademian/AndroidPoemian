@@ -5,15 +5,14 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.transaction
 import androidx.lifecycle.ViewModelProviders
-import ir.hco.appian.app.MainApp
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Article
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Query
 import ir.hco.appian.app.page.articleDetail.ArticleDetailPage
 import ir.hco.appian.app.page.poemList.ArticleListPage
-import ir.hco.appian.page.BasePage
-import ir.hossainco.utils.App
+import ir.hco.util.BaseApp
+import ir.hco.util.page.BasePage
 import ir.hossainco.utils.packages.startNewTask
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.toast
@@ -52,12 +51,12 @@ class HomePage : BasePage() {
 		inflater.inflate(R.menu.menu_home, menu)
 	}
 
-	override fun onOptionsItemSelected(item: MenuItem): Boolean {
-		return when (item.itemId) {
-//			R.id.item_apps -> {
-//				onClickOtherApps(null)
-//				true
-//			}
+	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+		return when (item?.itemId) {
+			R.id.item_apps -> {
+				onClickOtherApps(null)
+				true
+			}
 
 			R.id.item_rate -> {
 				onClickRate(null)
@@ -123,18 +122,18 @@ class HomePage : BasePage() {
 //	}
 
 	fun onClickOtherApps(it: View?) {
-		val context = context ?: return
+		val baseApp = context?.applicationContext as? BaseApp ?: return
 		createChooser(
-			(App.app as MainApp).publisher.createDeveloperPageIntent(),
-			context.getString(R.string.title_chooser)
-		).startNewTask(context)
+			baseApp.publisher.createDeveloperPageIntent(baseApp),
+			baseApp.getString(R.string.title_chooser)
+		).startNewTask(baseApp)
 	}
 
 	fun onClickRate(it: View?) {
-		val context = context ?: return
+		val baseApp = context?.applicationContext as? BaseApp ?: return
 		createChooser(
-			(App.app as MainApp).publisher.createAppRatePageIntent(context),
-			context.getString(R.string.title_chooser)
-		).startNewTask(context)
+			baseApp.publisher.createAppPageIntent(baseApp),
+			baseApp.getString(R.string.title_chooser)
+		).startNewTask(baseApp)
 	}
 }

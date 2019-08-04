@@ -2,7 +2,7 @@ package ir.hco.appian.app.data
 
 import ir.hco.appian.app.BuildConfig
 import ir.hco.appian.app.data.Article.Companion.readAssets
-import ir.hossainco.utils.App
+import ir.hco.util.BaseApp
 import org.json.JSONObject
 
 data class Poem(
@@ -21,10 +21,10 @@ data class Poem(
 		get() = readAssets("data/${path.replace("_", "-")}.txt")
 
 	val copyContent
-		get() = "$title | ${App.label}\n$url\n\n$content"
+		get() = "$title | ${BaseApp.appLabel}\n$url\n\n$content"
 
 	val shareContent
-		get() = "$title | ${App.label}\n$url\n\n$content"
+		get() = "$title | ${BaseApp.appLabel}\n$url\n\n$content"
 
 	constructor(data: JSONObject) : this(
 		id = data.optString("id") ?: "0",

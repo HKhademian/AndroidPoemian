@@ -4,6 +4,8 @@
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/libs/adad" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/libs/appbrain" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libs/fcm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libs/magnet" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/libs/util" vcs="Git" />
   </component>
 </project>

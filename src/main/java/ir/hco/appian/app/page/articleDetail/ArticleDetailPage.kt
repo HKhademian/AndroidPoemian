@@ -4,16 +4,18 @@ import android.content.ClipData
 import android.content.Intent.createChooser
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import ir.hco.appian.app.MainApp
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Article
 import ir.hco.appian.app.data.Poem
 import ir.hco.appian.app.data.Repository
-import ir.hco.appian.page.BasePage
+import ir.hco.appian.app.page.BasePage
+import ir.hco.util.BaseApp
+import ir.hco.util.views.SimpleToolbar
 import ir.hossainco.utils.packages.createShareTextIntent
 import ir.hossainco.utils.packages.startNewTask
 import org.jetbrains.anko.AnkoContext
@@ -61,44 +63,29 @@ class ArticleDetailPage() : BasePage() {
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val context = context!!
 		return ArticleDetailUI().createView(AnkoContext.create(context, this, false)).also { view ->
-			//			val titleView = view.findViewById<TextView>(R.id.title)
-//			val subtitleView = view.findViewById<TextView>(R.id.subtitle)
 			val textView = view.findViewById<TextView>(R.id.text)
-
 			val article = viewModel.article.value ?: return@also
-			// val category = Repository.cats.firstOrNull { it.id == article.parentId } ?: Repository.cats.first()
-
-//			titleView.content = article.title
-//			subtitleView.content = category.title
 			textView.text = article.content
 		}
 	}
 
 	override fun onStart() {
 		super.onStart()
-		val activity = activity?:return
-		(activity.applicationContext as? MainApp)?.advertiser?.mayShowInterstitial(activity)
+		val activity = activity ?: return
+		(activity.applicationContext as? BaseApp)?.advertiser?.mayShowFull(activity)
+
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 		super.onCreateOptionsMenu(menu, inflater)
-
-		val poem = viewModel.article.value as? Poem ?: return
 		inflater.inflate(R.menu.menu_article_detail, menu)
-
-		Repository.bookmarksLiveData.observe(this, Observer {
-			val bookmark = poem.bookmark
-			menu.findItem(R.id.item_bookmark)?.setIcon(
-				if (bookmark) R.drawable.ic_bookmark_on else R.drawable.ic_bookmark_off
-			)
-		})
 	}
 
-	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 		val context = context!!
 		val poem = viewModel.article.value as? Poem ?: return super.onOptionsItemSelected(item)
 
-		return when (item.itemId) {
+		return when (item?.itemId) {
 			R.id.item_share -> {
 				createChooser(
 					createShareTextIntent(poem.shareContent),
@@ -123,5 +110,22 @@ class ArticleDetailPage() : BasePage() {
 
 			else -> super.onOptionsItemSelected(item)
 		}
+	}
+
+	override fun onOptionsMenuCreated(menu: Menu) {
+		super.onOptionsMenuCreated(menu)
+		val activity = activity ?: return
+		val toolbar= activity.findViewById<SimpleToolbar>(R.id.toolbar) ?: return
+
+		val poem = viewModel.article.value as? Poem ?: return
+
+		Repository.bookmarksLiveData.observe(this, Observer {
+			val bookmark = poem.bookmark
+
+			toolbar.findViewById<ImageView>(R.id.item_bookmark)?.setImageResource(
+				if (bookmark) R.drawable.ic_bookmark_on else R.drawable.ic_bookmark_off
+			)
+		})
+
 	}
 }

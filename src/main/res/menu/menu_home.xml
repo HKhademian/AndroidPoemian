@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto">
-	<!--<item-->
-		<!--android:id="@+id/item_apps"-->
-		<!--android:title="@string/item_apps"-->
-		<!--android:icon="@drawable/ic_apps"-->
-		<!--app:showAsAction="always"/>-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/item_apps"
+		android:title="@string/item_apps"
+		android:icon="@drawable/ic_apps"
+		android:showAsAction="ifRoom"
+		android:visible="false"
+		android:enabled="true"/>
 
 	<item
 		android:id="@+id/item_rate"
 		android:title="@string/item_rate"
 		android:icon="@drawable/ic_rate"
-		app:showAsAction="ifRoom"/>
+		android:showAsAction="always"/>
 </menu>

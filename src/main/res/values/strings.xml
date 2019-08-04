@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 	<string name="app_name">فروغ</string>
 	<string name="app_title">@string/app_name</string>
 	<string name="app_subtitle">مجموعه اشعار فروغ فرخزاد</string>
-
-	<string name="item_share">اشتراک گذاری</string>
-	<string name="item_copy">کپی</string>
-	<string name="item_bookmark">نشان گذاری</string>
-	<string name="item_bookmarks">نشان گذاری ها</string>
-	<string name="item_settings">تنظیمات</string>
-	<string name="item_about_us">درباره ما</string>
-
-	<string name="action_copy_done">متن پیام کپی شد</string>
-	<string name="title_share_chooser">اشتراک گذاری در …</string>
-	<string name="drawer_open">باز</string>
-	<string name="drawer_close">بسته</string>
-	<string name="ads">تبلیغات</string>
-	<string name="item_apps">برنامه های دیگر ما</string>
-	<string name="item_rate">رای به برنامه</string>
-	<string name="title_chooser">انتخاب کنید …</string>
-	<string name="item_references">منابع</string>
 </resources>

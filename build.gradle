@@ -1,7 +1,5 @@
-import com.android.build.gradle.api.ApplicationVariant
-
 buildscript {
-	apply from: './deps.gradle'
+	apply from: './libs/util/deps.gradle'
 
 	repositories {
 		google()
@@ -130,16 +128,7 @@ android {
 		}
 	}
 
-	applicationVariants.all { ApplicationVariant variant ->
-		def flavors = variant.productFlavors
-		def product = flavors[0]
-		def publisher = flavors[1]
-		if (product.hasProperty(publisher.name)) {
-			Closure closure = product[publisher.name]
-			closure.delegate = variant
-			closure()
-		}
-	}
+	process(applicationVariants)
 
 	packagingOptions {
 		exclude '/kotlin_metadata/**'
@@ -161,6 +150,7 @@ dependencies {
 	implementation Deps.core_ktx
 	implementation Deps.fragment
 	implementation Deps.fragment_ktx
+	implementation Deps.vectordrawable
 	// implementation Deps.recyclerview
 	// implementation Deps.cardview
 

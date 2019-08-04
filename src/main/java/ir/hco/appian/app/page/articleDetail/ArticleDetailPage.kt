@@ -78,6 +78,8 @@ class ArticleDetailPage() : BasePage() {
 
 	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 		super.onCreateOptionsMenu(menu, inflater)
+
+		if (viewModel.article.value !is Poem) return
 		inflater.inflate(R.menu.menu_article_detail, menu)
 	}
 
@@ -115,7 +117,7 @@ class ArticleDetailPage() : BasePage() {
 	override fun onOptionsMenuCreated(menu: Menu) {
 		super.onOptionsMenuCreated(menu)
 		val activity = activity ?: return
-		val toolbar= activity.findViewById<SimpleToolbar>(R.id.toolbar) ?: return
+		val toolbar = activity.findViewById<SimpleToolbar>(R.id.toolbar) ?: return
 
 		val poem = viewModel.article.value as? Poem ?: return
 

@@ -15,5 +15,4 @@ class MarketApp : MainApp() {
 		fullToken = BuildConfig.ADAD_FULL_TOKEN,
 		notificationToken = BuildConfig.ADAD_NOTIFICATION_TOKEN
 	)
-
 }

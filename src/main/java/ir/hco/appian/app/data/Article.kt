@@ -20,6 +20,6 @@ interface Article : Serializable {
 			BaseApp.res.getString(R.string.item_references) ?: ""
 
 		override val content
-			get() = readAssets("(انتشار محتوا با ذکر منبع آن آزاد است)\n\nکوکا\nگود ریدز\nپارسی نو\n(dashmili-5) بلاگفا\nستاره\nآرگامگ\n")
+			get() = readAssets("references.txt")
 	}
 }

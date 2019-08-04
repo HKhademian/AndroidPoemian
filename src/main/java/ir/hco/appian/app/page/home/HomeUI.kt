@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import ir.hco.appian.app.BuildConfig
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Repository
@@ -52,6 +53,28 @@ internal class HomeUI : AnkoComponent<HomePage> {
 				margin = context.dip(4)
 			}
 
+			item(title = "Debug", iconRes = android.R.drawable.sym_def_app_icon) {
+				isVisible = BuildConfig.DEBUG
+			}.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
+				margin = context.dip(4)
+			}.setOnClickListener {
+				ui.owner.onClickDebug(it)
+			}
+
+			item(titleRes = R.string.item_apps, iconRes = R.drawable.ic_other_apps)
+				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
+					margin = context.dip(4)
+				}.setOnClickListener {
+					ui.owner.onClickOtherApps(it)
+				}
+
+			item(titleRes = R.string.item_rate, iconRes = R.drawable.ic_vote)
+				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
+					margin = context.dip(4)
+				}.setOnClickListener {
+					ui.owner.onClickRate(it)
+				}
+
 			item(titleRes = R.string.item_bookmarks, iconRes = R.drawable.ic_bookmark) {
 				Repository.bookmarksLiveData.observe(ui.owner, Observer {
 					isVisible = !it.isNullOrEmpty()
@@ -90,20 +113,6 @@ internal class HomeUI : AnkoComponent<HomePage> {
 //				}.setOnClickListener {
 //					ui.owner.onClickAbout(it)
 //				}
-
-			item(titleRes = R.string.item_apps, iconRes = R.drawable.ic_other_apps)
-				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-					margin = context.dip(4)
-				}.setOnClickListener {
-					ui.owner.onClickOtherApps(it)
-				}
-
-			item(titleRes = R.string.item_rate, iconRes = R.drawable.ic_vote)
-				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-					margin = context.dip(4)
-				}.setOnClickListener {
-					ui.owner.onClickRate(it)
-				}
 		}
 	}
 

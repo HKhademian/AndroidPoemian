@@ -1,12 +1,13 @@
 package ir.hco.appian.app.page.poemList
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Repository
 
@@ -19,10 +20,10 @@ internal class ArticleItemViewHolder(
 	private val bookmarkView = itemView.findViewById<ImageView>(R.id.bookmark)
 
 	private val bookmarkOnDrawable = DrawableCompat.wrap(
-		itemView.context.resources.getDrawable(R.drawable.ic_bookmark_on)
+		VectorDrawableCompat.create(itemView.context.resources, R.drawable.ic_bookmark_on, null)!!
 	).mutate()
 	private val bookmarkOffDrawable = DrawableCompat.wrap(
-		itemView.context.resources.getDrawable(R.drawable.ic_bookmark_off)
+		VectorDrawableCompat.create(itemView.context.resources, R.drawable.ic_share, null)!!
 	).mutate()
 
 	init {
@@ -30,7 +31,7 @@ internal class ArticleItemViewHolder(
 			itemClickListener(layoutPosition)
 		}
 
-		val color = Color.parseColor("#FF991111")
+		val color = ResourcesCompat.getColor(itemView.context.resources, R.color.primaryDarkColor, null)
 		DrawableCompat.setTint(bookmarkOnDrawable, color)
 		DrawableCompat.setTint(bookmarkOffDrawable, color)
 	}

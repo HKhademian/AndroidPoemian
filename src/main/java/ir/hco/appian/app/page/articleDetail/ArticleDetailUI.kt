@@ -10,33 +10,13 @@ import ir.hco.appian.app.R
 import ir.hossainco.utils.ui.TextSize
 import ir.hossainco.utils.view.appTextView
 import ir.hossainco.utils.view.verticalScrollView
-import org.jetbrains.anko.AnkoComponent
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.textColorResource
+import org.jetbrains.anko.*
 
 internal class ArticleDetailUI : AnkoComponent<ArticleDetailPage> {
 	override fun createView(ui: AnkoContext<ArticleDetailPage>) = with(ui) {
-		val context = ui.ctx
-
 		verticalScrollView {
 			layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-
-
-//			appTextView(
-//				id = R.id.title,
-//				notebookLineColorRes = R.color.secondaryDarkColor,
-//				textSize = TextSize.ExtraLargeTextSize
-//			) {
-//				textColorResource = R.color.secondaryTextColor
-//			}.lparams(width = MATCH_PARENT)
-//
-//			appTextView(
-//				id = R.id.subtitle,
-//				notebookLineColorRes = R.color.secondaryDarkColor,
-//				textSize = TextSize.LargeTextSize
-//			) {
-//				textColorResource = R.color.secondaryTextColor
-//			}.lparams(width = MATCH_PARENT)
+			padding = dip(16)
 
 			appTextView(
 				id = R.id.text,
@@ -46,7 +26,7 @@ internal class ArticleDetailUI : AnkoComponent<ArticleDetailPage> {
 			) {
 				textColorResource = R.color.secondaryTextColor
 				gravity = Gravity.START or Gravity.TOP
-				setLineSpacing(16f, 1.8f)
+				setLineSpacing(24f, 1.8f)
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 					justificationMode = Layout.JUSTIFICATION_MODE_INTER_WORD
 				}

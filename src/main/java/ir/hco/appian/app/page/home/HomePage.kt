@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.transaction
 import androidx.lifecycle.ViewModelProviders
+import com.crashlytics.android.Crashlytics
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Article
 import ir.hco.appian.app.data.Category
@@ -135,5 +136,9 @@ class HomePage : BasePage() {
 			baseApp.publisher.createAppPageIntent(baseApp),
 			baseApp.getString(R.string.title_chooser)
 		).startNewTask(baseApp)
+	}
+
+	fun onClickDebug(it: View?) {
+		Crashlytics.getInstance().crash()
 	}
 }

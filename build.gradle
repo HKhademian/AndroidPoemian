@@ -1,5 +1,5 @@
 buildscript {
-	apply from: './deps.gradle'
+	apply from: './libs/util/deps.gradle'
 
 	repositories {
 		google()
@@ -44,9 +44,9 @@ android {
 		minSdkVersion Versions.App.minSdk
 		targetSdkVersion Versions.App.targetSdk
 
-		applicationId 'ir.hco.appian.poem.foroog'
-		versionCode 105
-		versionName '01.05'
+		applicationId 'ir.hco.appian.app'
+		versionCode 101
+		versionName '01.01'
 
 		resConfigs 'fa'
 		vectorDrawables.useSupportLibrary true
@@ -75,7 +75,37 @@ android {
 		}
 	}
 
-	flavorDimensions 'publisher'
+	flavorDimensions 'product', 'publisher'
+
+	productFlavors {
+		foroog {
+			dimension 'product'
+			applicationId 'ir.poemian.foroog'
+			versionCode 105
+			versionName '01.05'
+
+			ext {
+				googlePlay = {
+					buildConfigField 'String', 'APP_LINK', '"bit.ly/2LZbfcv"'
+				}
+				bazaar = {
+					buildConfigField 'String', 'APP_LINK', '"bit.ly/31fI8oN"'
+					buildConfigField 'String', 'ADAD_APP_TOKEN', '"a1b66a0e-1db8-4d3a-9c00-5b834954a6bc"'
+					buildConfigField 'String', 'ADAD_BANNER_TOKEN', '"b7d2984d-7c9c-4dbf-bf96-b750d320f69b"'
+					buildConfigField 'String', 'ADAD_CONTENT_TOKEN', '"a5ef2321-34d2-4fc1-8ba4-2499f6364d07"'
+					buildConfigField 'String', 'ADAD_FULL_TOKEN', '"45cde708-534e-4142-b0be-ad8b16a68308"'
+					buildConfigField 'String', 'ADAD_NOTIFICATION_TOKEN', '"a5ef2321-34d2-4fc1-8ba4-2499f6364d07"'
+				}
+				myket = {
+					buildConfigField 'String', 'APP_LINK', '"bit.ly/3366uDn"'
+					buildConfigField 'String', 'MAGNET_BANNER_TOKEN', '"4ffe249d18df08d7b9142519600a101a"'
+					buildConfigField 'String', 'MAGNET_CONTENT_TOKEN', '"6f8a2e3bfbdf08d6a1412778607d7723"'
+					buildConfigField 'String', 'MAGNET_FULL_TOKEN', '"40439f23fbe108d6b6ec699fee5173af"'
+				}
+			}
+		}
+	}
+
 	productFlavors {
 		googlePlay {
 			dimension 'publisher'
@@ -86,23 +116,16 @@ android {
 			dimension 'publisher'
 			versionNameSuffix '-bazaar'
 
-			buildConfigField 'String', 'APP_LINK', '"bit.ly/2ZlLQN3"'
 			buildConfigField 'String', 'DEVELOPER_ID', '"hossainco"'
-			buildConfigField 'String', 'ADAD_APP_TOKEN', '"a1b66a0e-1db8-4d3a-9c00-5b834954a6bc"'
-			buildConfigField 'String', 'ADAD_BANNER_TOKEN', '"b7d2984d-7c9c-4dbf-bf96-b750d320f69b"'
-			buildConfigField 'String', 'ADAD_CONTENT_TOKEN', '"a5ef2321-34d2-4fc1-8ba4-2499f6364d07"'
-			buildConfigField 'String', 'ADAD_FULL_TOKEN', '"45cde708-534e-4142-b0be-ad8b16a68308"'
-			buildConfigField 'String', 'ADAD_NOTIFICATION_TOKEN', '"a5ef2321-34d2-4fc1-8ba4-2499f6364d07"'
 		}
 		myket {
 			dimension 'publisher'
 			versionNameSuffix '-myket'
 			buildConfigField 'String', 'DEVELOPER_ID', '"dev-19620"'
-			buildConfigField 'String', 'MAGNET_BANNER_TOKEN', '"4ffe249d18df08d7b9142519600a101a"'
-			buildConfigField 'String', 'MAGNET_CONTENT_TOKEN', '"6f8a2e3bfbdf08d6a1412778607d7723"'
-			buildConfigField 'String', 'MAGNET_FULL_TOKEN', '"40439f23fbe108d6b6ec699fee5173af"'
 		}
 	}
+
+	process(applicationVariants)
 
 	packagingOptions {
 		exclude '/kotlin_metadata/**'
@@ -124,8 +147,8 @@ dependencies {
 	implementation Deps.core_ktx
 	implementation Deps.fragment
 	implementation Deps.fragment_ktx
+	implementation Deps.vectordrawable
 	implementation Deps.recyclerview
-//	implementation Deps.appcompat
 	implementation Deps.cardview
 
 	implementation Deps.lifecycle_extensions
@@ -133,7 +156,7 @@ dependencies {
 	kapt Deps.lifecycle_compiler
 
 	implementation project(':lib-util')
-//	implementation project(':lib-fcm')
+	implementation project(':lib-fcm')
 
 	googlePlayImplementation project(':lib-appbrain')
 	bazaarImplementation project(':lib-adad')

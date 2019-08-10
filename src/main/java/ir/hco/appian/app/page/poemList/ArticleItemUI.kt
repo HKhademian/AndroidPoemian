@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.hco.appian.app.R
 import ir.hossainco.utils.ui.TextSize
 import ir.hossainco.utils.view.appTextView
-import ir.hossainco.utils.view.spliter
+import ir.hossainco.utils.view.splitter
 import org.jetbrains.anko.*
 
 internal class ArticleItemUI : AnkoComponent<ArticleAdapter> {
@@ -22,7 +22,7 @@ internal class ArticleItemUI : AnkoComponent<ArticleAdapter> {
 				minWidth = dip(64)
 			}.lparams(width = WRAP_CONTENT, height = MATCH_PARENT)
 
-			spliter()
+			splitter()
 				.lparams(width = dip(1), height = MATCH_PARENT)
 
 			appTextView(id = R.id.title, textSize = TextSize.LargeTextSize) {
@@ -30,7 +30,7 @@ internal class ArticleItemUI : AnkoComponent<ArticleAdapter> {
 				gravity = START or CENTER_VERTICAL
 			}.lparams(width = 0, height = WRAP_CONTENT, weight = 1f)
 
-			spliter()
+			splitter()
 				.lparams(width = dip(1), height = MATCH_PARENT)
 
 			imageView {

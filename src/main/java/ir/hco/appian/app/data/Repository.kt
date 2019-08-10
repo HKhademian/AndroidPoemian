@@ -44,15 +44,14 @@ object Repository {
 		val articlesData = index.getJSONArray("pages") ?: JSONArray()
 		// val pathsData = index.getJSONArray("paths")
 
-		cats.addAll((0 until catsData.length())
+		cats.clear()
+		cats += (0 until catsData.length())
 			.asSequence()
 			.map { catsData.getJSONObject(it) }
 			.map(::Category)
-			.onEach {
-				//Log.e("data.cat", it.toString())
-			})
 
 		var i = 0
+		poems.clear()
 		(0 until articlesData.length())
 			.asSequence()
 			.map {
@@ -65,8 +64,7 @@ object Repository {
 				else poem
 			}
 			.onEach {
-				poems.add(it)
-				// Log.e("data.poem", it.toString())
+				poems+= it
 			}
 			.count()
 	}

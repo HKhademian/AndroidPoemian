@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package ir.hco.appian.app.page.home
 
 import android.content.Intent.createChooser
@@ -5,15 +7,15 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.transaction
 import androidx.lifecycle.ViewModelProviders
-import com.crashlytics.android.Crashlytics
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Article
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Query
+import ir.hco.appian.app.page.BasePage
 import ir.hco.appian.app.page.articleDetail.ArticleDetailPage
 import ir.hco.appian.app.page.poemList.ArticleListPage
 import ir.hco.util.BaseApp
-import ir.hco.util.page.BasePage
+import ir.hossainco.utils.arch.liveDatas.mutableLiveData
 import ir.hossainco.utils.packages.startNewTask
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.toast
@@ -30,14 +32,15 @@ class HomePage : BasePage() {
 	override val title: String?
 		get() = context!!.getString(R.string.app_subtitle)
 
-	val expandedItemIds = HashSet<String>()
+	val expandedItemIds = mutableLiveData(emptySet<String>())
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		if (savedInstanceState != null) {
-			expandedItemIds.addAll(
-				savedInstanceState.getSerializable(EXTRA_EXPANDED_ITEM_IDS) as HashSet<String>
-			)
+
+			@Suppress("UNCHECKED_CAST")
+			expandedItemIds.value =
+				savedInstanceState.getSerializable(EXTRA_EXPANDED_ITEM_IDS) as? HashSet<String> ?: emptySet()
 		}
 		setHasOptionsMenu(true)
 	}
@@ -68,10 +71,25 @@ class HomePage : BasePage() {
 		}
 	}
 
+	override fun onBackKeyPressed(): Boolean {
+		return if (expandedItemIds.value!!.isNotEmpty()) {
+			expandedItemIds.value = emptySet()
+			true
+		} else false
+	}
+
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
-		outState.putSerializable(EXTRA_EXPANDED_ITEM_IDS, expandedItemIds)
+		outState.putSerializable(EXTRA_EXPANDED_ITEM_IDS, expandedItemIds.value!!.toHashSet())
 	}
+
+	fun onItemExpand(view: View, category: Category, isExpanded: Boolean) {
+		val ids = expandedItemIds.value!!.toHashSet()
+		if (isExpanded) ids.add(category.id)
+		else ids.remove(category.id)
+		expandedItemIds.value = ids
+	}
+
 
 	fun onClickCategory(it: Category) {
 		val query = Query.CategoryQuery(it.id)
@@ -92,36 +110,6 @@ class HomePage : BasePage() {
 		}
 	}
 
-	fun onItemExpand(view: View, category: Category, isExpanded: Boolean) {
-		if (isExpanded)
-			expandedItemIds.add(category.id)
-		else
-			expandedItemIds.remove(category.id)
-	}
-
-	fun onClickBookmarks(it: View?) {
-		fragmentManager?.transaction {
-			replace(R.id.fragment, ArticleListPage(Query.BookmarkQuery))
-			addToBackStack("bookmarks")
-		}
-	}
-
-	fun onClickReferences(it: View?) {
-		fragmentManager?.transaction {
-			replace(R.id.fragment, ArticleDetailPage(Article.ReferencesArticle))
-			addToBackStack("references")
-		}
-
-	}
-
-//	fun onClickSettings(it: View?) {
-//
-//	}
-
-//	fun onClickAbout(it: View?) {
-//
-//	}
-
 	fun onClickOtherApps(it: View?) {
 		val baseApp = context?.applicationContext as? BaseApp ?: return
 		createChooser(
@@ -138,7 +126,25 @@ class HomePage : BasePage() {
 		).startNewTask(baseApp)
 	}
 
-	fun onClickDebug(it: View?) {
-		Crashlytics.getInstance().crash()
+	fun onClickBookmarks(it: View?) {
+		fragmentManager?.transaction {
+			replace(R.id.fragment, ArticleListPage(Query.BookmarkQuery))
+			addToBackStack("bookmarks")
+		}
+	}
+
+	fun onClickSettings(it: View?) {
+		context!!.toast(R.string.alert_not_implemented)
+	}
+
+	fun onClickAbout(it: View?) {
+		context!!.toast(R.string.alert_not_implemented)
+	}
+
+	fun onClickReferences(it: View?) {
+		fragmentManager?.transaction {
+			replace(R.id.fragment, ArticleDetailPage(Article.ReferencesArticle))
+			addToBackStack("references")
+		}
 	}
 }

@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.core.view.ViewCompat.LAYOUT_DIRECTION_RTL
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.transaction
+import ir.hco.appian.app.page.exit.ExitPage
 import ir.hco.appian.app.page.splash.SplashPage
 import ir.hco.util.BaseApp
 import ir.hossainco.utils.packages.forceLayoutDir
@@ -39,5 +40,12 @@ class MainActivity : FragmentActivity() {
 			toast("Hello WORLD! ;D")
 			true
 		} else super.onOptionsItemSelected(item)
+	}
+
+	override fun onBackPressed() {
+		if (supportFragmentManager.popBackStackImmediate())
+			return
+
+		ExitPage().show(supportFragmentManager, "exit")
 	}
 }

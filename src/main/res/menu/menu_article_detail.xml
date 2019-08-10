@@ -8,11 +8,11 @@
 	<item
 		android:id="@+id/item_share"
 		android:title="@string/item_share"
-		android:icon="@drawable/ic_share"
+		android:icon="@drawable/ic_item_share"
 		android:showAsAction="ifRoom"/>
 	<item
 		android:id="@+id/item_copy"
 		android:title="@string/item_copy"
-		android:icon="@drawable/ic_copy"
+		android:icon="@drawable/ic_item_copy"
 		android:showAsAction="ifRoom"/>
 </menu>

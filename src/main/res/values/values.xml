@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+	<color name="primaryColor">#b71c1c</color>
+	<color name="primaryLightColor">#f05545</color>
+	<color name="primaryDarkColor">#7f0000</color>
+	<color name="secondaryColor">#f44336</color>
+	<color name="secondaryLightColor">#ff7961</color>
+	<color name="secondaryDarkColor">#ba000d</color>
+	<color name="primaryTextColor">#ffffff</color>
+	<color name="secondaryTextColor">#000000</color>
+	<color name="background">#eaeaea</color>
+	<color name="backgroundDark">#909090</color>
+
 	<string name="app_name">Appian</string>
 	<string name="app_title">@string/app_name</string>
 	<string name="app_subtitle">Collection of well designed apps</string>
+
+	<string name="alert_not_implemented">منتظر آپدیت جدید باشید</string>
+	<string name="dialog_exit_title">میخای بری؟</string>
+	<string name="dialog_exit_dismiss">نه میمونم :)</string>
+	<string name="dialog_exit_confirm">اوهوم :(</string>
 </resources>

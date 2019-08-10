@@ -9,17 +9,18 @@ import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import ir.hco.appian.app.BuildConfig
 import ir.hco.appian.app.R
 import ir.hco.appian.app.data.Category
 import ir.hco.appian.app.data.Repository
 import ir.hco.appian.app.views.cardView
 import ir.hco.appian.app.views.item
 import ir.hco.util.BaseApp.Companion.context
+import ir.hco.util.DrawableSource
+import ir.hco.util.StringSource
 import ir.hco.util.views.linearLParams
 import ir.hossainco.utils.ui.TextSize
 import ir.hossainco.utils.view.appTextView
-import ir.hossainco.utils.view.spliter
+import ir.hossainco.utils.view.splitter
 import ir.hossainco.utils.view.verticalScrollView
 import org.jetbrains.anko.*
 
@@ -41,7 +42,7 @@ internal class HomeUI : AnkoComponent<HomePage> {
 						scaleType = ImageView.ScaleType.CENTER_CROP
 					}.lparams(width = MATCH_PARENT, height = dip(256))
 
-					appTextView(textRes = R.string.app_title, textSize = TextSize.ExtraLargeTextSize) {
+					appTextView(textRes = R.string.app_title, textSize = TextSize.HeaderTextSize) {
 						gravity = CENTER
 					}.lparams(width = MATCH_PARENT)
 
@@ -50,79 +51,97 @@ internal class HomeUI : AnkoComponent<HomePage> {
 					}.lparams(width = MATCH_PARENT)
 				}
 			}.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-				margin = context.dip(4)
+				margin = dip(4)
 			}
 
-			item(title = "Debug", iconRes = android.R.drawable.sym_def_app_icon) {
-				isVisible = BuildConfig.DEBUG
-			}.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-				margin = context.dip(4)
-			}.setOnClickListener {
-				ui.owner.onClickDebug(it)
+			linearLayout {
+				item(title = StringSource.of(R.string.item_apps), icon = DrawableSource.of(R.drawable.ic_action_apps))
+					.lparams(0, WRAP_CONTENT, 1f) {
+						margin = context.dip(4)
+					}.setOnClickListener {
+						ui.owner.onClickOtherApps(it)
+					}
+
+				item(title = StringSource.of(R.string.item_rate), icon = DrawableSource.of(R.drawable.ic_action_vote))
+					.lparams(0, WRAP_CONTENT, 1f) {
+						margin = dip(4)
+					}.setOnClickListener {
+						ui.owner.onClickRate(it)
+					}
 			}
 
-			item(titleRes = R.string.item_apps, iconRes = R.drawable.ic_other_apps)
-				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-					margin = context.dip(4)
-				}.setOnClickListener {
-					ui.owner.onClickOtherApps(it)
-				}
-
-			item(titleRes = R.string.item_rate, iconRes = R.drawable.ic_vote)
-				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-					margin = context.dip(4)
-				}.setOnClickListener {
-					ui.owner.onClickRate(it)
-				}
-
-			item(titleRes = R.string.item_bookmarks, iconRes = R.drawable.ic_bookmark) {
+			item(
+				title = StringSource.of(R.string.item_bookmarks),
+				icon = DrawableSource.of(R.drawable.ic_action_bookmarks)
+			) { _, _ ->
 				Repository.bookmarksLiveData.observe(ui.owner, Observer {
 					isVisible = !it.isNullOrEmpty()
 				})
-			}.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-				margin = context.dip(4)
+			}.lparams(MATCH_PARENT, WRAP_CONTENT) {
+				margin = dip(4)
 			}.setOnClickListener {
 				ui.owner.onClickBookmarks(it)
 			}
 
-			spliter()
+			splitter()
 
 			Repository.cats.filter { it.parentId == "0" }.forEach {
 				category(ui, it, 0)
 			}
 
-			spliter()
+			splitter()
 
-//			item(titleRes = R.string.item_settings, iconRes = R.mipmap.ic_launcher_round)
-//				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-//					margin = context.dip(4)
-//				}.setOnClickListener {
-//					ui.owner.onClickSettings(it)
-//				}
-
-			item(titleRes = R.string.item_references, iconRes = R.drawable.ic_references)
-				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-					margin = context.dip(4)
+			item(title = StringSource.of(R.string.item_settings), icon = DrawableSource.of(R.drawable.ic_action_settings))
+				.lparams(MATCH_PARENT, WRAP_CONTENT) {
+					margin = dip(4)
 				}.setOnClickListener {
-					ui.owner.onClickReferences(it)
+					ui.owner.onClickSettings(it)
 				}
 
-//			item(ui.owner, titleRes = R.string.item_about_us, iconRes = R.mipmap.ic_launcher_round)
-//				.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-//					margin = context.dip(4)
-//				}.setOnClickListener {
-//					ui.owner.onClickAbout(it)
-//				}
+			linearLayout {
+
+				item(title = StringSource.of(R.string.item_about_us), icon = DrawableSource.of(R.mipmap.ic_launcher))
+					.lparams(0, WRAP_CONTENT, 1f) {
+						margin = dip(4)
+					}.setOnClickListener {
+						ui.owner.onClickAbout(it)
+					}
+
+				item(
+					title = StringSource.of(R.string.item_references),
+					icon = DrawableSource.of(R.drawable.ic_action_references)
+				)
+					.lparams(0, WRAP_CONTENT, 1f) {
+						margin = dip(4)
+					}.setOnClickListener {
+						ui.owner.onClickReferences(it)
+					}
+			}
 		}
 	}
 
 	fun ViewManager.category(ui: AnkoContext<HomePage>, category: Category, level: Int): CardView {
 		val subCategories = Repository.cats.filter { it.parentId == category.id }
 
-		val view = item(title = category.title, iconRes = R.mipmap.ic_launcher)
-			.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
-				margin = context.dip(4)
-			}
+		val view = item(
+			title = StringSource.of(category.title)
+		) { _, iconView: ImageView ->
+			iconView.isVisible = true
+			iconView.scaleType = ImageView.ScaleType.CENTER_CROP
+			iconView.padding = 0
+			iconView.setImageResource(
+				when (category.id.subSequence(0, 1)) {
+					"1" -> R.drawable.splash
+					"2" -> R.drawable.foroog2
+					"3" -> R.drawable.foroog3
+					"4" -> R.drawable.foroog4
+					"5" -> R.drawable.foroog
+					else -> R.mipmap.ic_launcher
+				}
+			)
+		}.linearLParams(MATCH_PARENT, WRAP_CONTENT) {
+			margin = context.dip(4)
+		}
 
 		if (subCategories.isEmpty()) {
 			view.setOnClickListener {
@@ -130,21 +149,21 @@ internal class HomeUI : AnkoComponent<HomePage> {
 			}
 		} else {
 			val subView = verticalLayout {
-				isVisible = category.id in ui.owner.expandedItemIds
+				padding = dip(16)
 				topPadding = 0
-				bottomPadding = context.dip(16)
-				leftPadding = context.dip(16)
-				rightPadding = context.dip(16)
+				backgroundColor = Color.LTGRAY.withAlpha(0x33)
 
 				subCategories.forEach {
 					category(ui, it, level + 1)
 				}
 			}
 
+			ui.owner.expandedItemIds.observe(ui.owner.viewLifecycleOwner, Observer {
+				subView.isVisible = it != null && category.id in it
+			})
+
 			view.setOnClickListener {
-				val isVisible = subView.isVisible
-				subView.isVisible = !isVisible
-				ui.owner.onItemExpand(view, category, !isVisible)
+				ui.owner.onItemExpand(view, category, !subView.isVisible)
 			}
 		}
 

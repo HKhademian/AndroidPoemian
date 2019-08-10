@@ -23,7 +23,7 @@ internal class ArticleItemViewHolder(
 		VectorDrawableCompat.create(itemView.context.resources, R.drawable.ic_bookmark_on, null)!!
 	).mutate()
 	private val bookmarkOffDrawable = DrawableCompat.wrap(
-		VectorDrawableCompat.create(itemView.context.resources, R.drawable.ic_share, null)!!
+		VectorDrawableCompat.create(itemView.context.resources, R.drawable.ic_bookmark_off, null)!!
 	).mutate()
 
 	init {

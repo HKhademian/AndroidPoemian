@@ -2,9 +2,17 @@
 	path = libs/util
 	url = git@github.com:HKhademian/AndroidLibUtil.git
 
+[submodule "libs/firebase"]
+	path = libs/firebase
+	url = D:\\Repository\\Android\\LibFirebase.git
+
 [submodule "libs/fcm"]
 	path = libs/fcm
-	url = git@github.com:HKhademian/AndroidLibFCM.git
+	url = D:\\Repository\\Android\\LibFCM.git
+
+[submodule "libs/pushe"]
+	path = libs/pushe
+	url = D:\\Repository\\Android\\LibPushe.git
 
 [submodule "libs/appbrain"]
 	path = libs/appbrain

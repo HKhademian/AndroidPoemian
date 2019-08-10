@@ -4,6 +4,6 @@
 		android:id="@+id/item_test"
 		android:title="@string/app_name"
 		android:visible="false"
-		android:icon="@drawable/ic_cancel"
+		android:icon="@drawable/ic_item_apps"
 		android:showAsAction="always"/>
 </menu>

@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="primaryColor">#4a148c</color>
+	<color name="primaryLightColor">#7c43bd</color>
+	<color name="primaryDarkColor">#12005e</color>
+	<color name="secondaryColor">#8e24aa</color>
+	<color name="secondaryLightColor">#c158dc</color>
+	<color name="secondaryDarkColor">#5c007a</color>
+	<color name="primaryTextColor">#ffffff</color>
+	<color name="secondaryTextColor">#ffffff</color>
+	<color name="background">#eaeaea</color>
+	<color name="backgroundDark">#909090</color>
+
 	<string name="app_name">Appian</string>
 	<string name="app_title">@string/app_name</string>
 	<string name="app_subtitle">Collection of well designed apps</string>

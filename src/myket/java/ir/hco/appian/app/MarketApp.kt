@@ -1,7 +1,7 @@
 package ir.hco.appian.app
 
 import ir.hco.magnet.MagnetAdvertiser
-import ir.hco.util.Advertiser
+import ir.hco.util.ads.Advertiser
 import ir.hco.util.MyketPublisher
 
 class MarketApp : MainApp() {

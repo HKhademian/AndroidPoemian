@@ -22,7 +22,7 @@ internal class MainUI : AnkoComponent<MainActivity> {
 				id = R.id.footer
 			}.lparams(width = MATCH_PARENT, height = WRAP_CONTENT)
 
-			ads()
+			ads().lparams(width = MATCH_PARENT, height = WRAP_CONTENT)
 		}
 	}
 }

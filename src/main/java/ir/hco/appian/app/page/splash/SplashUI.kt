@@ -22,9 +22,11 @@ internal class SplashUI : AnkoComponent<SplashPage> {
 
 			cardView {
 				radius = 32f
+				padding = dip(16)
 
 				verticalLayout {
 					gravity = CENTER
+					padding = dip(16)
 
 					imageView(R.mipmap.ic_launcher)
 						.lparams(width = dip(192), height = dip(192))

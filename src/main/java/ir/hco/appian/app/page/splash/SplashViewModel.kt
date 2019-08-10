@@ -15,9 +15,11 @@ import kotlin.math.max
 
 internal class SplashViewModel(app: Application) : BaseViewModel(app) {
 	val loadCompleteEvent = MutableLiveEvent(Event(false))
+	private var isLoading = false
 
 	fun start() {
-		viewModelScope.launch {
+		if (!isLoading) viewModelScope.launch {
+			isLoading = true
 			load()
 
 			loadCompleteEvent.postEvent(true)
